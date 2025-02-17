@@ -15,26 +15,31 @@ const iconLinks: {
   label: string;
   href: string;
   icon: keyof typeof iconPaths;
+  target: string;
 }[] = [
   {
     label: "GitHub",
     href: "https://github.com/ORomero227",
     icon: "github-logo",
+    target: "_blank",
   },
   {
     label: "Email",
     href: "mailto:oromero2812@outlook.com",
     icon: "mail",
+    target: "_self",
   },
   {
     label: "Linkedin",
     href: "https://www.linkedin.com/in/oscar-romero-barbosa/",
     icon: "linkedIn",
+    target: "_blank",
   },
   {
     label: "Download CV",
-    href: "",
-    icon: "cv-logo",
+    href: "/CV-OscarRomero.pdf",
+    icon: "fileDownload",
+    target: "_blank",
   },
 ];
 
@@ -117,8 +122,8 @@ const isCurrentPage = (href: string) => {
     <div class="menu-footer">
       <div class="socials">
         {
-          iconLinks.map(({ href, icon, label }) => (
-            <a href={href} class="social">
+          iconLinks.map(({ href, icon, label, target }) => (
+            <a href={href} target={target} class="social">
               <span class="sr-only">{label}</span>
               <Icon icon={icon} />
             </a>
