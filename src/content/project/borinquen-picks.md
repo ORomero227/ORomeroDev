@@ -1,0 +1,21 @@
+---
+title: Borinquen Picks
+publishDate: 2025-02-16 00:00:00
+img: /assets/BorinquenPicksLogo.webp
+img_alt: Iridescent ripples of a bright blue and pink liquid
+description: |
+  Developed an Android app recommending Puerto Rican attractions.
+tags:
+  - Developer
+---
+
+Borinquen Picks is an **Android** application built with **Jetpack Compose** that provides recommendations for various places in Puerto Rico. The app categorizes recommendations, such as restaurants, and displays the best options available. The UI supports both dark and light themes, and images are loaded asynchronously from **Firebase Storage** using the **Coil** library.
+
+> Technologies Used
+
+- Kotlin
+- Jetpack Compose
+- MVVM Architecture
+- Firebase Storage for hosting images
+- Coil for asynchronous image loading
+- Material Design for UI components
