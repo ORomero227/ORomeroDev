@@ -13,9 +13,23 @@ Borinquen Picks is an **Android** application built with **Jetpack Compose** tha
 
 > Technologies Used
 
-- Kotlin
-- Jetpack Compose
-- MVVM Architecture
-- Firebase Storage for hosting images
-- Coil for asynchronous image loading
-- Material Design for UI components
+- **Kotlin**
+- **Jetpack Compose**
+- **MVVM Architecture**
+- **Firebase Storage** (for hosting images)
+- **Firebase Realtime Database** (for hosting the content data)
+- **Coil** (for asynchronous image loading)
+- **Material Design** (for UI components)
+
+> Usage
+
+Borinquen Picks allows users to browse categorized recommendations effortlessly. The app follows a state-based navigation approach, ensuring smooth transitions between different screens.
+
+> Features:
+
+- **Category Selection**:
+  The app displays a menu with various categories (e.g., restaurants, attractions).
+- **Recommendation List**:
+  When a category is selected, the app navigates to a screen displaying a list of recommendations for that category.
+- **Recommendation Details**:
+  Selecting a recommendation opens a detailed screen, showing more information about the selected place, including images loaded asynchronously from Firebase Storage.
