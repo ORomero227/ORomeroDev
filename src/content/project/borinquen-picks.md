@@ -1,8 +1,14 @@
 ---
 title: Borinquen Picks
 publishDate: 2025-02-16 00:00:00
+projectType: Mobile App
 img: /assets/BorinquenPicksLogo.webp
-img_alt: Iridescent ripples of a bright blue and pink liquid
+img_alt: Borinquen Picks Project Logo
+githubCode: https://github.com/ORomero227/BorinquenPicks
+images:
+  - url: /assets/project_images/borinquenPicks_image_1.webp
+  - url: /assets/project_images/borinquenPicks_image_2.webp
+  - url: /assets/project_images/borinquenPicks_image_3.webp
 description: |
   Developed an Android app recommending Puerto Rican attractions.
 tags:
@@ -21,10 +27,6 @@ Borinquen Picks is an **Android** application built with **Jetpack Compose** tha
 - **Coil** (for asynchronous image loading)
 - **Material Design** (for UI components)
 
-> Usage
-
-Borinquen Picks allows users to browse categorized recommendations effortlessly. The app follows a state-based navigation approach, ensuring smooth transitions between different screens.
-
 > Features:
 
 - **Category Selection**:
@@ -33,3 +35,7 @@ Borinquen Picks allows users to browse categorized recommendations effortlessly.
   When a category is selected, the app navigates to a screen displaying a list of recommendations for that category.
 - **Recommendation Details**:
   Selecting a recommendation opens a detailed screen, showing more information about the selected place, including images loaded asynchronously from Firebase Storage.
+
+> Usage
+
+Borinquen Picks allows users to browse categorized recommendations effortlessly. The app follows a state-based navigation approach, ensuring smooth transitions between different screens.

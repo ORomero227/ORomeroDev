@@ -1,8 +1,10 @@
 ---
 title: Romero Tires And Rims
 publishDate: 2020-03-04 00:00:00
+projectType: Desktop App
 img: /assets/RomeroRimsLogo.webp
-img_alt: Pearls of silky soft white cotton, bubble up under vibrant lighting
+img_alt: Romero Tires And Rims Logo
+githubCode: https://github.com/ORomero227/RomerosTiresAndRims
 description: |
   Built a Visual Basic point of sale system for tire and suspension part businesses, handling customer management, sales, and Excel export using SQL Server.
 tags:
@@ -10,6 +12,11 @@ tags:
 ---
 
 This project is a point of sale system developed in Visual Basic specifically designed for businesses selling car tires, rims, and suspension parts. It allows salespersons to manage their customers, conduct sales operations, and export data to Excel. It utilizes a Microsoft SQL Server database to store information.
+
+> Technologies Used
+
+- **Programming Language**: Visual Basic
+- **Database**: Microsoft SQL Server
 
 > Features
 

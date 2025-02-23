@@ -9,7 +9,7 @@ import CallToAction from "../components/CallToAction.astro";
 import Grid from "../components/Grid.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
-import Pill from "../components/Pill.astro";
+import LinkPill from "../components/LinkPill.astro";
 import PortfolioPreview from "../components/PortfolioPreview.astro";
 
 // Page section components
@@ -35,18 +35,18 @@ const projects = (await getCollection("project"))
           align="start"
         >
           <div class="links">
-            <Pill href="mailto:oromero2812@outlook.com" target="_self">
+            <LinkPill href="mailto:oromero2812@outlook.com" target="_self">
               <Icon icon="mail" size="1.33em" /> Contact Me
-            </Pill>
-            <Pill href="https://github.com/ORomero227">
+            </LinkPill>
+            <LinkPill href="https://github.com/ORomero227">
               <Icon icon="github-logo" size="1.33em" /> Github
-            </Pill>
-            <Pill href="https://www.linkedin.com/in/oscar-romero-barbosa/">
+            </LinkPill>
+            <LinkPill href="https://www.linkedin.com/in/oscar-romero-barbosa/">
               <Icon icon="linkedIn" size="1.33em" /> LinkedIn
-            </Pill>
-            <Pill href="/CV-OscarRomero.pdf">
+            </LinkPill>
+            <LinkPill href="/CV-OscarRomero.pdf">
               <Icon icon="fileDownload" size="1.33em" /> Download CV
-            </Pill>
+            </LinkPill>
           </div>
         </Hero>
       </header>

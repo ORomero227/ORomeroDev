@@ -1,9 +1,18 @@
-<div class="pill">
+---
+interface Props {
+  href?: string;
+  target?: "_blank" | "_self";
+}
+
+const { href, target = "_blank" } = Astro.props;
+---
+
+<a href={href} target={target} class="link-pill">
   <slot />
-</div>
+</a>
 
 <style>
-  .pill {
+  .link-pill {
     display: flex;
     padding: 0.5rem 1rem;
     gap: 0.5rem;

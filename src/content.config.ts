@@ -9,9 +9,19 @@ export const collections = {
       title: z.string(),
       description: z.string(),
       publishDate: z.coerce.date(),
+      projectType: z.string(),
       tags: z.array(z.string()),
       img: z.string(),
       img_alt: z.string().optional(),
+      images: z
+        .array(
+          z.object({
+            url: z.string(),
+            alt: z.string().optional(),
+          })
+        )
+        .optional(),
+      githubCode: z.string().optional(),
     }),
   }),
 };

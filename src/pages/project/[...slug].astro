@@ -8,6 +8,7 @@ import Hero from "../../components/Hero.astro";
 import Icon from "../../components/Icon.astro";
 import Pill from "../../components/Pill.astro";
 import { render } from "astro:content";
+import LinkPill from "../../components/LinkPill.astro";
 
 interface Props {
   entry: CollectionEntry<"project">;
@@ -40,6 +41,13 @@ const { Content } = await render(entry);
             <div class="details">
               <div class="tags">
                 {entry.data.tags.map((t) => <Pill>{t}</Pill>)}
+                {
+                  entry.data.githubCode && (
+                    <LinkPill href={entry.data.githubCode} target="_blank">
+                      <Icon icon="github-logo" size="1.33em" /> Code
+                    </LinkPill>
+                  )
+                }
               </div>
               <p class="description">{entry.data.description}</p>
             </div>

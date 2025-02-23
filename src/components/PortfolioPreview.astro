@@ -9,7 +9,7 @@ const { data, id } = Astro.props.project;
 ---
 
 <a class="card" href={`/project/${id}`}>
-  <span class="title">{data.title}</span>
+  <span class="title">{data.projectType}</span>
   <img
     src={data.img}
     alt={data.img_alt || ""}
