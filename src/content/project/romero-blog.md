@@ -1,7 +1,7 @@
 ---
 title: Romero Blog
 publishDate: 2019-12-01 00:00:00
-projectType: Web App
+projectType: Web App - Python
 img: /assets/RomeroBlogLogo.webp
 img_alt: Romero Blog Project Logo
 githubCode: https://github.com/ORomero227/RomeroBlog
@@ -20,6 +20,7 @@ This is a simple blog application built with Flask. It allows users to register,
 
 > Technologies Used
 
+- **Python**
 - **Backend**: Flask, SQLAlchemy, Flask-Login
 - **Frontend**: HTML, Bootstrap5, Flask-CKEditor
 - **Database**: SQLite
