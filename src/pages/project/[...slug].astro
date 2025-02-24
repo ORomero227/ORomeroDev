@@ -9,6 +9,7 @@ import Icon from "../../components/Icon.astro";
 import Pill from "../../components/Pill.astro";
 import { render } from "astro:content";
 import LinkPill from "../../components/LinkPill.astro";
+import ImagesSlider from "../../components/ImagesSlider.astro";
 
 interface Props {
   entry: CollectionEntry<"project">;
@@ -57,8 +58,12 @@ const { Content } = await render(entry);
       <main class="wrapper">
         <div class="stack gap-10 content">
           {
-            entry.data.img && (
-              <img src={entry.data.img} alt={entry.data.img_alt || ""} />
+            entry.data.images ? (
+              <ImagesSlider images={entry.data.images} />
+            ) : (
+              entry.data.img && (
+                <img src={entry.data.img} alt={entry.data.img_alt} />
+              )
             )
           }
           <div class="content">

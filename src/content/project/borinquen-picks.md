@@ -6,6 +6,7 @@ img: /assets/BorinquenPicksLogo.webp
 img_alt: Borinquen Picks Project Logo
 githubCode: https://github.com/ORomero227/BorinquenPicks
 images:
+  - url: /assets/BorinquenPicksLogo.webp
   - url: /assets/project_images/borinquenPicks_image_1.webp
   - url: /assets/project_images/borinquenPicks_image_2.webp
   - url: /assets/project_images/borinquenPicks_image_3.webp
