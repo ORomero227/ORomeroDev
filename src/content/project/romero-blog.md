@@ -5,6 +5,11 @@ projectType: Web App
 img: /assets/RomeroBlogLogo.webp
 img_alt: Romero Blog Project Logo
 githubCode: https://github.com/ORomero227/RomeroBlog
+images:
+  - url: /assets/RomeroBlogLogo.webp
+  - url: /assets/project_images/romero_blog_image_1.webp
+  - url: /assets/project_images/romero_blog_image_2.webp
+  - url: /assets/project_images/romero_blog_image_3.webp
 description: |
   Developed a web application enabling user registration, login, blog post management (CRUD operations), and commenting.
 tags:

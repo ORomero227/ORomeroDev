@@ -5,6 +5,11 @@ projectType: Desktop App
 img: /assets/RomeroRimsLogo.webp
 img_alt: Romero Tires And Rims Logo
 githubCode: https://github.com/ORomero227/RomerosTiresAndRims
+images:
+  - url: /assets/RomeroRimsLogo.webp
+  - url: /assets/project_images/romero_rims_image_1.webp
+  - url: /assets/project_images/romero_rims_image_2.webp
+  - url: /assets/project_images/romero_rims_image_3.webp
 description: |
   Built a Visual Basic point of sale system for tire and suspension part businesses, handling customer management, sales, and Excel export using SQL Server.
 tags:
