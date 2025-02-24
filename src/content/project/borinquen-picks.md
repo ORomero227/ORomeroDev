@@ -1,7 +1,7 @@
 ---
 title: Borinquen Picks
 publishDate: 2025-02-16 00:00:00
-projectType: Mobile App
+projectType: Mobile App - Kotlin
 img: /assets/BorinquenPicksLogo.webp
 img_alt: Borinquen Picks Project Logo
 githubCode: https://github.com/ORomero227/BorinquenPicks

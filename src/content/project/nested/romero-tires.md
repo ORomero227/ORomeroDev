@@ -1,7 +1,7 @@
 ---
 title: Romero Tires And Rims
 publishDate: 2020-03-04 00:00:00
-projectType: Desktop App
+projectType: Desktop App - Visual Basic
 img: /assets/RomeroRimsLogo.webp
 img_alt: Romero Tires And Rims Logo
 githubCode: https://github.com/ORomero227/RomerosTiresAndRims
