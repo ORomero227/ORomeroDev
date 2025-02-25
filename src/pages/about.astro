@@ -26,36 +26,28 @@ const education = [
 
 const skills = [
   {
-    category: "Frontend",
-    technologies: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "Astro",
-      "TailwindCSS",
-      "Boostrap",
-    ],
+    category: "Programming Languages",
+    technologies: ["Java", "Python", "Typescript"],
   },
   {
-    category: "Backend",
-    technologies: ["Flask", "Spring Boot", "ASP.Net"],
+    category: "Front-End",
+    technologies: ["HTML", "CSS", "React", "Astro", "Tailwind"],
+  },
+  {
+    category: "Back-End",
+    technologies: ["Flask", "Spring Boot"],
   },
   {
     category: "Mobile",
-    technologies: ["Android SDK", "Compose", "XML Views"],
+    technologies: ["Android SDK", "Compose", "Kotlin"],
+  },
+  {
+    category: "Databases",
+    technologies: ["MySQL", "SQL Server", "Firebase"],
   },
   {
     category: "Tools",
-    technologies: [
-      "Git",
-      "Github",
-      "Jira",
-      "Firebase",
-      "VS Code",
-      "IntelliJ Idea",
-    ],
+    technologies: ["Git", "Github"],
   },
 ];
 ---
@@ -75,8 +67,8 @@ const skills = [
             I'm Oscar Romero Barbosa, a software developer from Puerto Rico with
             a strong background in Computer Science and experience in web and
             backend development. I specialize in technologies like Spring Boot
-            and React, and I work with databases such as PostgreSQL, Firebase,
-            and MS SQL Server. Currently, I'm expanding my skills in mobile
+            and React, and I work with databases such as MySQL, Firebase, and MS
+            SQL Server. Currently, I'm expanding my skills in mobile
             development. I'm passionate about building efficient and scalable
             solutions and always looking for new challenges to keep growing
             professionally. Fun fact: I'm also interested in cybersecurity and
@@ -123,7 +115,7 @@ const skills = [
           {
             skills.map((skill) => (
               <div
-                class={`skill-card ${skill.category === "Frontend" || skill.category === "Tools" ? "two-columns" : ""}`}
+                class={`skill-card ${skill.category === "Frontend" ? "two-columns" : ""}`}
               >
                 <h3>{skill.category}</h3>
                 <ul>
