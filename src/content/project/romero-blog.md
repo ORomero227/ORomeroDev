@@ -1,7 +1,7 @@
 ---
 title: Romero Blog
 publishDate: 2019-12-01 00:00:00
-projectType: Web App - Python
+projectType: Web App
 img: /assets/RomeroBlogLogo.webp
 img_alt: Romero Blog Project Logo
 githubCode: https://github.com/ORomero227/RomeroBlog

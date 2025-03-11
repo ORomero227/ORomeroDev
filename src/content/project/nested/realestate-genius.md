@@ -1,7 +1,7 @@
 ---
 title: Real Estate Entry Genius
 publishDate: 2019-03-05 00:00:00
-projectType: Automation - Python
+projectType: Automation
 img: /assets/RealEstateEntryGenius.webp
 img_alt: RealEstate Genius Project Logo
 githubCode: https://github.com/ORomero227/Real-Estate-Entry-Genius

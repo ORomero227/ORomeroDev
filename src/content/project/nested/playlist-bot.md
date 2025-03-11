@@ -1,7 +1,7 @@
 ---
 title: My Playlist Crafter Bot
 publishDate: 2019-03-04 00:00:00
-projectType: Automation - Python
+projectType: Automation
 img: /assets/PlaylistCrafterBot.webp
 img_alt: Playlist Crafter Bot Project Logo
 githubCode: https://github.com/ORomero227/MyPlaylistCrafterBot

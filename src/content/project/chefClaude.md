@@ -1,7 +1,7 @@
 ---
 title: Chef Claude
 publishDate: 2024-03-03 00:00:00
-projectType: Web App - React
+projectType: Web App
 img: /assets/ChefClaude.webp
 img_alt: Chef Claude Project Logo
 githubCode: https://github.com/ORomero227/ChefClaude

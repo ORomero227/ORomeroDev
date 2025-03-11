@@ -1,7 +1,7 @@
 ---
 title: Chill's Restaurant
 publishDate: 2019-03-06 00:00:00
-projectType: Web App - C#
+projectType: Web App
 img: /assets/ChillsRestaurantLogo.webp
 img_alt: Chill's Restaurant Logo
 githubCode: https://github.com/ORomero227/ChillsRestaurant

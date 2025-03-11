@@ -9,19 +9,22 @@ const { data, id } = Astro.props.project;
 ---
 
 <a class="card" href={`/project/${id}`}>
-  <span class="title">{data.projectType}</span>
   <img
     src={data.img}
     alt={data.img_alt || ""}
     loading="lazy"
     decoding="async"
   />
+  <div class="overlay">
+    <p class="title">{data.projectType}</p>
+    <p class="description">{data.description}</p>
+  </div>
 </a>
 
 <style>
   .card {
-    display: grid;
-    grid-template: auto 1fr / auto 1fr;
+    position: relative;
+    display: block;
     height: 11rem;
     background: var(--gradient-subtle);
     border: 1px solid var(--gray-800);
@@ -39,31 +42,52 @@ const { data, id } = Astro.props.project;
     box-shadow: var(--shadow-md);
   }
 
-  .title {
-    grid-area: 1 / 1 / 2 / 2;
-    z-index: 1;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: var(--gray-999);
-    color: var(--gray-200);
-    border-radius: 0.375rem;
-  }
-
   img {
-    grid-area: 1 / 1 / 3 / 3;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Oscurecer imagen */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  }
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 0.375rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: none; /* Ocultar por defecto */
+  }
+
+  /* Mostrar la descripción en tablets y pantallas grandes */
   @media (min-width: 50em) {
     .card {
       height: 22rem;
       border-radius: 1.5rem;
     }
 
-    .title {
-      border-radius: 0.9375rem;
+    .overlay {
+      padding: 2rem;
+    }
+
+    .description {
+      display: block; /* Se muestra solo en tablets y más grandes */
     }
   }
 </style>

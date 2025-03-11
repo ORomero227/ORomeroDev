@@ -1,7 +1,7 @@
 ---
 title: Romero Tires And Rims
 publishDate: 2020-03-04 00:00:00
-projectType: Desktop App - Visual Basic
+projectType: Desktop App
 img: /assets/RomeroRimsLogo.webp
 img_alt: Romero Tires And Rims Logo
 githubCode: https://github.com/ORomero227/RomerosTiresAndRims
@@ -11,7 +11,7 @@ images:
   - url: /assets/project_images/romero_rims_image_2.webp
   - url: /assets/project_images/romero_rims_image_3.webp
 description: |
-  Built a Visual Basic point of sale system for tire and suspension part businesses, handling customer management, sales, and Excel export using SQL Server.
+  Built a Visual Basic CRM system for tire and suspension part businesses.
 tags:
   - Developer
 ---
