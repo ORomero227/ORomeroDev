@@ -25,14 +25,19 @@ This project is a point of sale system developed in Visual Basic specifically de
 
 > Features
 
-1. **Sign Up:**
-   - Only salespersons can sign up for accounts. Provide necessary information such as name, email, and password to create a new account.
-2. **Login:**
-   - Run the application and log in with your salesperson account.
-3. **Customer Management:**
-   - Create new customer profiles.
-   - Edit existing customer information.
-   - Delete customer profiles when necessary.
-   - Search for customers by name, phone number, or any other relevant criteria.
-4. **Export to Excel:**
-   - Salespersons can export customer information to an Excel file for further analysis or reporting.
+- **Customer Relationship Management (CRM):**
+  - Create new customer profiles.
+  - Edit existing customer information.
+  - Delete customer profiles.
+  - Search for customers by name, phone number, or other relevant criteria.
+- **Point of Sale (POS):**
+  - Record sales of tires, rims, and suspension parts.
+  - Inventory management (implicit in sales functionality).
+  - Generate sales reports.
+- **User Management:**
+  - Register new salespersons with information such as name, email, and password.
+  - Secure login for salespersons.
+- **Export to Excel:**
+  - Export customer and/or sales information to Excel files for further analysis and reporting.
+- **Database:**
+  - Uses Microsoft SQL Server for data storage.
