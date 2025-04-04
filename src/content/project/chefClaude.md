@@ -7,6 +7,11 @@ img_alt: Chef Claude Project Logo
 githubCode: https://github.com/ORomero227/ChefClaude
 description: |
   Developed a web application to generate AI-powered recipe suggestions based on at least four user-provided ingredients.
+images:
+  - url: /assets/ChefClaude.webp
+  - url: /assets/project_images/chef_claude_image_1.webp
+  - url: /assets/project_images/chef_claude_image_2.webp
+  - url: /assets/project_images/chef_claude_image_3.webp
 tags:
   - Developer
 ---
