@@ -9,31 +9,30 @@ description: |
   Developed a web application to generate AI-powered recipe suggestions based on at least four user-provided ingredients.
 images:
   - url: /assets/ChefClaude.webp
-  - url: /assets/project_images/chef_claude_image_1.webp
-  - url: /assets/project_images/chef_claude_image_2.webp
-  - url: /assets/project_images/chef_claude_image_3.webp
 tags:
   - Developer
 ---
 
-**Chef Claude** is an interactive web application built with **React** and styled using **Tailwind CSS**, featuring integration with the **Claude AI API** to generate recipes based on user-provided ingredients.
+**Chef Claude** is a React + Tailwind app powered by Claude AI that turns your ingredients into creative recipes. Just enter what you have — no setup needed, it's ready to use!
 
-> Technologies Used
+> Features
+
+- 🥕 **Ingredient-Based Recipe Suggestions**  
+  Enter at least 4 ingredients and get a complete, creative recipe suggestion.
+- 🤖 **Powered by Claude AI**  
+  Recipes are generated using natural language understanding via Claude AI.
+- 📱 **Responsive Design**  
+  Works great on desktop and mobile.
+
+> Try It Live
+
+🔗 https://chefclaude-cuisine.vercel.app/
+
+> Built With
 
 - **React**: For a dynamic and component-based user interface.
 - **Tailwind CSS**: Ensures a modern, responsive design.
 - **Claude AI API**: Powers recipe generation with AI intelligence.
 - **Vite**: Streamlines the development and build processes.
-
-> Features
-
-- Input at least 4 ingredients, and the AI suggests a recipe that includes those ingredients and optional additions.
-- Recipes are formatted in **Markdown** for easy readability on the web.
-- **Skeleton Loader** displays during API processing to enhance the user experience.
-- Clean and responsive UI design for seamless usability.
-
-> Usage
-
-1. Add at least four ingredients to the input list.
-2. Click the **Get Recipe** button.
-3. The AI, powered by Claude AI, will generate a recipe based on the provided ingredients.
+- **Zod**: Validates the structure of AI Responses
+- **Vercel**: Handles serverless backend + deployment
