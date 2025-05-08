@@ -1,9 +1,9 @@
 ---
 title: OS-Simulator
-publishDate: 2020-12-01 00:00:00
+publishDate: 2019-03-04 00:00:00
 projectType: Desktop App
 img: /assets/OsSimulatorLogo.webp
-img_alt: OS-Simulator Logo Image
+img_alt: OS-Simulator Logo
 githubCode: https://github.com/ORomero227/OS-Simulator
 images:
   - url: /assets/OsSimulatorLogo.webp
