@@ -15,6 +15,8 @@ description: |
   A web application that allows you to rediscover music from specific moments in time.
 tags:
   - Developer
+technologies: ["TypeScript", "React", "Tailwind CSS", "Vercel"]
+shortDescription: "A web application that allows you to rediscover music from specific moments in time. By selecting any date from the past, the app scrapes the Billboard Hot 100 chart for that date and compiles the songs into a playlist that you can view or save to your Spotify account."
 ---
 
 TimeTunes is a web application that allows you to rediscover music from specific moments in time. By selecting any date from the past, the app scrapes the Billboard Hot 100 chart for that date and compiles the songs into a playlist that you can view or save to your Spotify account.

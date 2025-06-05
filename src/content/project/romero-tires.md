@@ -14,6 +14,8 @@ description: |
   Built a Visual Basic CRM system for tire and suspension part businesses.
 tags:
   - Developer
+technologies: ["Visual Basic", "SQL Server", "Excel"]
+shortDescription: "A Customer Relationship Management (CRM) and Point of Sale (POS) system developed in Visual Basic. It enables salespersons to manage customers, conduct sales operations, and export data to Excel. It utilizes a Microsoft SQL Server database to store information."
 ---
 
 This project is a point of sale system developed in Visual Basic specifically designed for businesses selling car tires, rims, and suspension parts. It allows salespersons to manage their customers, conduct sales operations, and export data to Excel. It utilizes a Microsoft SQL Server database to store information.

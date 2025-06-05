@@ -8,6 +8,7 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string(),
+      shortDescription: z.string().optional(),
       publishDate: z.coerce.date(),
       projectType: z.string(),
       tags: z.array(z.string()),
@@ -22,6 +23,7 @@ export const collections = {
         )
         .optional(),
       githubCode: z.string().optional(),
+      technologies: z.array(z.string()).optional(),
     }),
   }),
 };

@@ -14,6 +14,8 @@ description: |
   Developed a web application enabling user registration, login, blog post management (CRUD operations), and commenting.
 tags:
   - Developer
+technologies: ["Python", "Flask", "SQLite"]
+shortDescription: "A simple blog application built with Flask. It allows users to register, log in, view and comment on blog posts, and for administrators (users with special permissions), it provides the ability to add, edit, and delete posts."
 ---
 
 This is a simple blog application built with Flask. It allows users to register, log in, view and comment on blog posts, and for administrators (users with special permissions), it provides the ability to add, edit, and delete posts.

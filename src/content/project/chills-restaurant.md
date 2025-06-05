@@ -9,6 +9,8 @@ description: |
   A dynamic restaurant website built with .NET and MS SQL Server for a robust backend and efficient data management.
 tags:
   - Backend Developer
+technologies: ["C#", "ASP.NET", "EntityFramework", "SQL Server"]
+shortDescription: "A collaborative project to create an attractive and dynamic website for a restaurant using cutting-edge technologies."
 ---
 
 This is a collaborative project to create an attractive and dynamic website for a restaurant using cutting-edge technologies. Our development stack primarily revolves around the .NET framework for robust backend functionality, along with an MS SQL Server database for efficient data management.

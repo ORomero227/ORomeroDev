@@ -5,12 +5,15 @@ projectType: Web App
 img: /assets/ChefClaude.webp
 img_alt: Chef Claude Project Logo
 githubCode: https://github.com/ORomero227/ChefClaude
+shortDescription: |
+  A React app styled with Tailwind CSS, using the Claude AI API to generate recipes based on user ingredients.
 description: |
   Developed a web application to generate AI-powered recipe suggestions based on at least four user-provided ingredients.
 images:
   - url: /assets/ChefClaude.webp
 tags:
   - Developer
+technologies: ["TypeScript", "React", "Tailwind CSS", "Vercel"]
 ---
 
 **Chef Claude** is a React + Tailwind app powered by Claude AI that turns your ingredients into creative recipes. Just enter what you have — no setup needed, it's ready to use!

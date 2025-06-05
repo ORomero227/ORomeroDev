@@ -14,6 +14,8 @@ description: |
   Developed an Android app recommending Puerto Rican attractions.
 tags:
   - Developer
+technologies: ["Kotlin", "Jetpack Compose", "Firebase"]
+shortDescription: "An Android app that recommends the best places in Puerto Rico, categorized for easy browsing. It features a modern design, supports dark and light modes, and loads images seamlessly."
 ---
 
 Borinquen Picks is an **Android** application built with **Jetpack Compose** that provides recommendations for various places in Puerto Rico. The app categorizes recommendations, such as restaurants, and displays the best options available. The UI supports both dark and light themes, and images are loaded asynchronously from **Firebase Storage** using the **Coil** library.

@@ -9,6 +9,8 @@ description: |
   A Python script that automates real estate data entry by scraping property listings and filling out a Google Form with the extracted information.
 tags:
   - Developer
+shortDescription: "This Python project leverages web scraping and web automation techniques to extract real estate listing information and automatically populate a Google Forms with the gathered data."
+technologies: ["Python", "Selenium", "BeautifulSoup", "Google Forms"]
 ---
 
 This Python project leverages web scraping and web automation techniques to extract real estate listing information and automatically populate a Google Forms with the gathered data.
