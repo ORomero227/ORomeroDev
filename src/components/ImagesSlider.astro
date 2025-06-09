@@ -14,15 +14,30 @@ const { images } = Astro.props;
   <!-- Additional required wrapper -->
   <div class="swiper-wrapper">
     {
-      images.map((image) => (
+      images.map((image, idx) => (
         <div class="swiper-slide">
-          <img src={image.url} alt={image.alt || "Project Screenshot"} />
+          <img
+            src={image.url}
+            alt={image.alt || "Project Screenshot"}
+            style="cursor:pointer"
+            onclick={`openLightbox(${idx})`}
+          />
         </div>
       ))
     }
   </div>
   <div class="swiper-button-prev"></div>
   <div class="swiper-button-next"></div>
+</div>
+
+<!-- Lightbox overlay -->
+<div
+  id="lightbox-overlay"
+  class="lightbox-overlay"
+  style="display:none"
+  onclick="closeLightbox(event)"
+>
+  <img id="lightbox-img" class="lightbox-img" src="" alt="Imagen ampliada" />
 </div>
 
 <script>
@@ -38,6 +53,36 @@ const { images } = Astro.props;
       prevEl: ".swiper-button-prev",
     },
   });
+
+  // Lightbox logic
+  // @ts-ignore
+  window.openLightbox = function (idx: number) {
+    const images = Array.from(document.querySelectorAll(".swiper-slide img"));
+    const img = images[idx] as HTMLImageElement | undefined;
+    const lightbox = document.getElementById("lightbox-overlay");
+    const lightboxImg = document.getElementById(
+      "lightbox-img"
+    ) as HTMLImageElement | null;
+    if (img && lightbox && lightboxImg) {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+  };
+  // @ts-ignore
+  window.closeLightbox = function (event: MouseEvent) {
+    const overlay = document.getElementById("lightbox-overlay");
+    if (
+      overlay &&
+      event.target &&
+      ((event.target as HTMLElement).classList.contains("lightbox-overlay") ||
+        (event.target as HTMLElement).classList.contains("lightbox-close"))
+    ) {
+      overlay.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  };
 </script>
 
 <style>
@@ -50,5 +95,32 @@ const { images } = Astro.props;
   .swiper-button-next,
   .swiper-button-prev {
     color: var(--accent-dark);
+  }
+
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .lightbox-overlay[style*="display: flex"] {
+    display: flex !important;
+  }
+  .lightbox-img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+  }
+  .lightbox-close {
+    /* Eliminada la X del lightbox */
+    display: none;
   }
 </style>
