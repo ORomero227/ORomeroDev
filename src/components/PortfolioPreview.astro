@@ -40,8 +40,8 @@ const { data, id } = Astro.props.project;
     box-shadow: var(--shadow-sm);
     text-decoration: none;
     font-family: var(--font-brand);
-    font-size: var(--text-base);
-    transition: box-shadow var(--theme-transition);
+    height: 100%; /* Fuerza que todas las cards tengan la misma altura en el grid */
+    min-height: 22rem; /* Ajusta según el diseño, asegura altura mínima uniforme */
   }
 
   .card:hover {
@@ -55,6 +55,10 @@ const { data, id } = Astro.props.project;
   }
 
   .content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     padding: 1rem;
     background-color: var(--gray-999_40);
   }
@@ -67,6 +71,7 @@ const { data, id } = Astro.props.project;
   }
 
   .description {
+    flex-grow: 1;
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
     color: var(--gray-100);
