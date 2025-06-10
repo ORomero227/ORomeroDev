@@ -1,3 +1,1 @@
-
-![RomeroDevLight](https://github.com/user-attachments/assets/0fadb620-e3ed-43e0-950b-fe6b0c0fc6ae)
-![RomeroDevDark](https://github.com/user-attachments/assets/0214a12b-7699-43e0-bd47-11e7c421af5a)
+![709shots_so](https://github.com/user-attachments/assets/b4e0c674-a0e4-4454-96d4-7b5b996e1f3c)
