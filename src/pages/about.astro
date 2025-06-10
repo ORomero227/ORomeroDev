@@ -1,8 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
 import ContactCTA from "../components/ContactCTA.astro";
-import Hero from "../components/Hero.astro";
+
+const profile = {
+  name: "Oscar Romero Barbosa",
+  title: "Full Stack Developer",
+  location: "Puerto Rico",
+  summary: `Passionate about building digital solutions that make a real impact. Specialized in modern technologies like React, Node.js, and Python. Focused on writing clean, scalable, and maintainable code, always following best practices and staying up-to-date with the latest trends in development.`,
+  image: "/assets/at-work.jpg",
+};
 
 const education = [
   {
@@ -39,7 +45,7 @@ const skills = [
   },
   {
     category: "Mobile",
-    technologies: ["Android SDK", "Compose", "Kotlin"],
+    technologies: ["Android SDK", "Compose", "Kotlin", "React Native"],
   },
   {
     category: "Databases",
@@ -53,226 +59,237 @@ const skills = [
 ---
 
 <BaseLayout title="About | Oscar Romero" description="About Oscar Romero">
+  <main class="about-modern">
+    <section class="hero-modern">
+      <div class="hero-info">
+        <h1>{profile.name}</h1>
+        <h2>{profile.title}</h2>
+        <p class="location">{profile.location}</p>
+        <p class="summary">{profile.summary}</p>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <h2 class="section-title">Education and Certifications</h2>
+      <div class="education-modern-grid">
+        {
+          education.map((edu) => (
+            <div class="education-modern-card">
+              <h3>{edu.title}</h3>
+              <p class="institution">{edu.institution}</p>
+              <span class="date">
+                {edu.startDate
+                  ? `${edu.startDate} - ${edu.endDate}`
+                  : `Finalizado: ${edu.endDate}`}
+              </span>
+              {edu.description && <p class="desc">{edu.description}</p>}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section-block">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-modern-grid">
+        {
+          skills.map((skill) => (
+            <div class="skill-modern-card">
+              <h3>{skill.category}</h3>
+              <ul>
+                {skill.technologies.map((tech) => (
+                  <li>{tech}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
   <div class="stack gap-20">
-    <main class="wrapper about">
-      <Hero
-        title="About"
-        tagline="Thanks for stopping by. Read below to learn more about myself and my background."
-      />
-
-      <section>
-        <h2 class="section-title">Background</h2>
-        <div class="content">
-          <p>
-            I'm a full stack developer passionate about building digital
-            solutions that make a real impact. I specialize in modern
-            technologies like React, Node.js, and Python. My focus is on writing
-            clean, scalable, and maintainable code, always following best
-            practices and staying up-to-date with the latest trends in
-            development. When I'm not coding, I enjoy exploring new
-            technologies, contributing to open source projects, and sharing
-            knowledge with the developer community.
-          </p>
-        </div>
-      </section>
-      <section>
-        <h2 class="section-title">Education</h2>
-        <div class="education-grid">
-          {
-            education.map((education) => (
-              <div class="education-card">
-                <div class="education-card-content">
-                  <h3>{education.title}</h3>
-                  <p>{education.institution}</p>
-                  <div>
-                    <span>
-                      {education.startDate
-                        ? `Completed: ${education.startDate} - ${education.endDate}`
-                        : `Completed: ${education.endDate}`}
-                    </span>
-                  </div>
-                  <p>{education.description}</p>
-                  {education.achivements.length > 0 && (
-                    <div>
-                      <h4>Key Achievements:</h4>
-                      <ul>
-                        {education.achivements.map((achievement) => (
-                          <li>{achievement}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </section>
-      <section>
-        <h2 class="section-title">Skills</h2>
-        <div class="skills-grid">
-          {
-            skills.map((skill) => (
-              <div
-                class={`skill-card ${skill.category === "Frontend" ? "two-columns" : ""}`}
-              >
-                <h3>{skill.category}</h3>
-                <ul>
-                  {skill.technologies.map((tech) => (
-                    <li>{tech}</li>
-                  ))}
-                </ul>
-              </div>
-            ))
-          }
-        </div>
-      </section>
-    </main>
-
     <ContactCTA />
   </div>
+
+  <style>
+    .about-modern {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem 1.5rem;
+    }
+
+    .hero-modern {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      background: var(--gray-999_40);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-md);
+      padding: 2.5rem 1.5rem;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 24px 0 #001a33cc;
+      border: 3px solid var(--gray-800);
+      background: var(--gray-900);
+    }
+
+    .hero-info {
+      text-align: center;
+    }
+
+    .hero-info h1 {
+      font-size: 2.2rem;
+      color: var(--gray-0);
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-info h2 {
+      font-size: 1.2rem;
+      color: var(--gray-200);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .location {
+      color: var(--gray-500);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .summary {
+      color: var(--gray-200);
+      font-size: 1.1rem;
+      margin-bottom: 0;
+    }
+
+    .section-block {
+      margin-top: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--gray-0);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .education-modern-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .education-modern-card {
+      background: var(--gray-999_40);
+      border-radius: 1rem;
+      box-shadow: var(--shadow-sm);
+      padding: 1.5rem 1.2rem;
+      border: 1px solid var(--gray-800);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .education-modern-card h3 {
+      font-size: 1.1rem;
+      color: var(--gray-0);
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+
+    .institution {
+      color: var(--gray-200);
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .date {
+      color: var(--gray-500);
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .desc {
+      color: var(--gray-200);
+      font-size: 0.98rem;
+    }
+
+    .skills-modern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-modern-card {
+      background: var(--gray-999_40);
+      border-radius: 1rem;
+      box-shadow: var(--shadow-sm);
+      padding: 1.2rem 1rem;
+      border: 1px solid var(--gray-800);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .skill-modern-card h3 {
+      font-size: 1.05rem;
+      color: var(--gray-0);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .skill-modern-card ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+    }
+
+    .skill-modern-card li {
+      color: var(--gray-200);
+      font-size: 0.98rem;
+      background: var(--gray-900_60);
+      border-radius: 0.5rem;
+      padding: 0.2rem 0.7rem;
+      font-weight: 500;
+    }
+
+    @media (min-width: 50em) {
+      .about-modern {
+        padding: 3.5rem 0 5rem 0;
+      }
+
+      .hero-modern {
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+        text-align: left;
+      }
+
+      .hero-info {
+        text-align: left;
+      }
+
+      .education-modern-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .skills-modern-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
 </BaseLayout>
-
-<style>
-  .about {
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem;
-  }
-
-  img {
-    margin-top: 1.5rem;
-    border-radius: 1.5rem;
-    box-shadow: var(--shadow-md);
-  }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    color: var(--gray-200);
-  }
-
-  .section-title {
-    grid-column-start: 1;
-    font-size: var(--text-xl);
-    color: var(--gray-0);
-  }
-
-  .content {
-    grid-column: 2 / 4;
-  }
-
-  .content :global(a) {
-    text-decoration: 1px solid underline transparent;
-    text-underline-offset: 0.25em;
-    transition: text-decoration-color var(--theme-transition);
-  }
-
-  .content :global(a:hover),
-  .content :global(a:focus) {
-    text-decoration-color: currentColor;
-  }
-
-  .skills-grid,
-  .education-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .skill-card,
-  .education-card {
-    border: 1px solid var(--gray-800);
-    border-radius: 0.75rem;
-    padding: 1.4rem;
-    background-color: var(--gray-999_40);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .skill-card h3 {
-    font-size: var(--text-lg);
-    margin-bottom: 0.75rem;
-    color: var(--gray-200);
-  }
-
-  .skill-card ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .skill-card li {
-    font-size: var(--text-md);
-    color: var(--gray-200);
-  }
-
-  .two-columns ul {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 1rem;
-  }
-
-  .education-card h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--gray-200);
-  }
-
-  .education-card p {
-    font-size: 0.875rem;
-    color: var(--gray-200);
-    margin-bottom: 1rem;
-  }
-
-  .education-card div span {
-    font-size: 0.875rem;
-    color: var(--gray-500);
-  }
-
-  .education-card h4 {
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 600; /* font-semibold */
-    color: var(--gray-0);
-    margin-bottom: 0.5rem;
-  }
-
-  .education-card ul {
-    list-style-type: disc;
-    padding-left: 1rem;
-  }
-
-  .education-card li {
-    font-size: 0.875rem;
-    color: var(--gray-200);
-    margin-bottom: 0.25rem;
-  }
-
-  @media (min-width: 50em) {
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 60% 1fr;
-    }
-
-    .about > :global(:first-child) {
-      grid-column-start: 2;
-    }
-
-    section {
-      display: contents;
-      font-size: var(--text-lg);
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .education-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-  }
-</style>
