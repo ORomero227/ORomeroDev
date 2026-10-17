@@ -23,6 +23,7 @@ export const collections = {
         )
         .optional(),
       githubCode: z.string().optional(),
+      liveUrl: z.string().optional(),
       technologies: z.array(z.string()).optional(),
     }),
   }),

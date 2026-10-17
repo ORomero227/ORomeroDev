@@ -1,0 +1,124 @@
+---
+import { profile } from "../data/profile";
+const today = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+---
+
+<section class="sign container reveal">
+  <div class="sign-inner">
+    <h2>Let's work together.</h2>
+    <p class="muted">Two signatures. One first message.</p>
+
+    <form class="sig-grid" data-sign action={`mailto:${profile.email}`} method="get">
+      <div class="sig">
+        <p class="sig-label">Developer</p>
+        <p class="sig-name signed">{profile.shortName}</p>
+        <p class="sig-meta">Signed · {today}</p>
+      </div>
+      <div class="sig">
+        <label class="sig-label" for="sig-input">You</label>
+        <input
+          id="sig-input"
+          class="sig-name sig-input"
+          type="text"
+          name="subject"
+          placeholder="Type your name"
+          autocomplete="name"
+        />
+        <p class="sig-meta">Awaiting signature</p>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign &amp; send a message</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-sign]");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = form.querySelector<HTMLInputElement>("#sig-input");
+    const name = input?.value.trim();
+    const subject = name ? `Hi Oscar — from ${name}` : "Hi Oscar";
+    window.location.href = `${form.action.split("?")[0]}?subject=${encodeURIComponent(subject)}`;
+  });
+</script>
+
+<style>
+  .sign {
+    padding-bottom: 120px;
+  }
+
+  .sign-inner {
+    border-top: 1px solid var(--line);
+    padding-top: 72px;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: -0.035em;
+    margin-bottom: 8px;
+  }
+
+  .sig-grid {
+    max-width: 720px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    justify-items: center;
+  }
+
+  .sig {
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 8px;
+  }
+
+  .sig-label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .sig-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1.2;
+    min-height: 36px;
+  }
+
+  .sig-input {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: var(--ink);
+    outline: none;
+  }
+
+  .sig-input::placeholder {
+    color: var(--faint);
+  }
+
+  .sig-meta {
+    font-size: 12px;
+    color: var(--faint);
+    margin-top: 4px;
+  }
+
+  @media (min-width: 720px) {
+    .sig-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .sig-grid .btn {
+      grid-column: 1 / -1;
+    }
+    .sign {
+      padding-bottom: 160px;
+    }
+  }
+</style>

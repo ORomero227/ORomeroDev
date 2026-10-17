@@ -1,187 +1,410 @@
 ---
 import { getCollection } from "astro:content";
-
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectRow from "../components/ProjectRow.astro";
+import AskDemo from "../components/AskDemo.astro";
+import ProfileDoc from "../components/ProfileDoc.astro";
+import SignCTA from "../components/SignCTA.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import { profile } from "../data/profile";
 
-// Component Imports
-import CallToAction from "../components/CallToAction.astro";
-import Grid from "../components/Grid.astro";
-import Hero from "../components/Hero.astro";
-import Icon from "../components/Icon.astro";
-import LinkPill from "../components/LinkPill.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
-
-// Page section components
-import ContactCTA from "../components/ContactCTA.astro";
-import Skills from "../components/Skills.astro";
-
-// Content Fetching: List four most recent projects
 const projects = (await getCollection("project"))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 4);
+  .slice(0, 5);
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+/**
+ * Monospace fragments drifting in the hero's side gutters.
+ * `type: true` makes a fragment type itself out on a loop.
+ * Positions are percentages of the hero box.
+ */
+const snippets = [
+  { text: "git push origin main", x: 1, y: 13, type: false },
+  { text: "SELECT * FROM projects\nWHERE status = 'live';", x: 2, y: 27, type: true },
+  { text: "npm run build", x: -1, y: 37, type: false },
+  { text: "val picks = viewModel\n  .recommendations", x: 8, y: 55, type: false },
+  { text: "dotnet ef database update", x: 4, y: 63, type: false },
+  { text: "Deployed to production.\nAll checks passed.", x: 78, y: 9, type: false },
+  { text: "Which tests are failing?", x: 90, y: 25, type: true },
+  { text: "app.run(debug=False)", x: 84, y: 42, type: false },
+  { text: "Make the API respond\nunder 200ms.", x: 89, y: 75, type: false },
+];
 ---
 
-<BaseLayout>
-  <div class="stack gap-20 lg:gap-48">
-    <div class="wrapper stack gap-8 lg:gap-20">
-      <header class="hero">
-        <Hero
-          title="Hi, I'm Oscar Romero"
-          tagline="I am a Software Developer who is currently based in Puerto Rico"
-          align="start"
-        >
-          <div class="links">
-            <LinkPill href="mailto:oromero2812@outlook.com" target="_self">
-              <Icon icon="mail" size="1.33em" /> Contact Me
-            </LinkPill>
-            <LinkPill href="https://github.com/ORomero227">
-              <Icon icon="github-logo" size="1.33em" /> Github
-            </LinkPill>
-            <LinkPill href="https://www.linkedin.com/in/oscar-romero-barbosa/">
-              <Icon icon="linkedIn" size="1.33em" /> LinkedIn
-            </LinkPill>
-            <LinkPill href="/CV-OscarRomero.pdf">
-              <Icon icon="fileDownload" size="1.33em" /> Download CV
-            </LinkPill>
-          </div>
-        </Hero>
-      </header>
+<BaseLayout navVariant="dark">
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="snippets" aria-hidden="true">
+        {
+          snippets.map((s, i) => (
+            <pre
+              class:list={["snip", s.type && "typing"]}
+              style={`left:${s.x}%;top:${s.y}%;--d:${(i % 5) * 1.3}s`}
+              data-text={s.text}
+            >{s.text}</pre>
+          ))
+        }
+      </div>
 
-      <Skills />
+      <div class="container hero-inner">
+        <h1 id="hero-title" class="headline">
+          <span>I build web apps.</span>
+          <span>Ship Android apps.</span>
+          <span>Wire up the backends.</span>
+          <span class="bright">You get software that just works.</span>
+        </h1>
+
+        <div class="hero-actions">
+          <a href={`mailto:${profile.email}`} class="hbtn hbtn-solid">Contact me</a>
+          <a href="#work" class="hbtn hbtn-soft">
+            <svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true"
+              ><path d="M0 0.5v11L10.5 6z" fill="currentColor"></path></svg
+            >
+            See my work
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature cards overlap the bottom of the gradient -->
+    <div class="container features">
+      <FeatureCard
+        id="work"
+        title="Selected work"
+        description="Web, mobile, desktop and automation projects — each one shipped end to end."
+      >
+        <div class="work-split">
+          <div class="pane pane-left">
+            <p class="pane-label">Start with what you need.</p>
+            <p class="pane-title">A problem. A first build.</p>
+            <div class="fake-input">
+              <span>Describe what you need…</span>
+              <kbd>Enter</kbd>
+            </div>
+            <a href="/project/" class="all-link">Browse all projects →</a>
+          </div>
+          <div class="pane pane-right">
+            <div class="pane-bar">
+              <span>Recent projects</span>
+              <span class="faint">{projects.length} shown</span>
+            </div>
+            <ul class="rows">
+              {projects.map((p) => <ProjectRow project={p} />)}
+            </ul>
+          </div>
+        </div>
+      </FeatureCard>
+
+      <FeatureCard
+        title="Ask about my work"
+        description="Find stacks, details and answers across my projects, with the source at hand."
+        pausable
+      >
+        <AskDemo />
+      </FeatureCard>
+
+      <FeatureCard
+        title="Read the fine print"
+        description="Scope, stack and education — written like a contract, minus the legalese."
+      >
+        <div class="reveal"><ProfileDoc /></div>
+      </FeatureCard>
     </div>
 
-    <main class="wrapper stack gap-20 lg:gap-48">
-      <section class="section with-cta">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Featured Projects</h3>
-        </header>
-
-        <div class="gallery">
-          <Grid variant="offset">
-            {
-              projects.map((project) => (
-                <li>
-                  <PortfolioPreview project={project} />
-                </li>
-              ))
-            }
-          </Grid>
-        </div>
-
-        <div class="cta">
-          <CallToAction href="/project/">
-            View All
-            <Icon icon="arrow-right" size="1.2em" />
-          </CallToAction>
-        </div>
-      </section>
-    </main>
-
-    <ContactCTA />
-  </div>
+    <SignCTA />
+  </main>
 </BaseLayout>
 
+<script>
+  // Type-out loop for a few hero snippets.
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) {
+    document.querySelectorAll<HTMLElement>(".snip.typing").forEach((el, n) => {
+      const full = el.dataset.text ?? "";
+      let i = 0;
+      let dir = 1;
+      const tick = () => {
+        i += dir;
+        el.textContent = full.slice(0, i);
+        let wait = 55 + Math.random() * 60;
+        if (i >= full.length) {
+          dir = -1;
+          wait = 2600;
+        } else if (i <= 0) {
+          dir = 1;
+          wait = 900;
+        } else if (dir < 0) {
+          wait = 22;
+        }
+        setTimeout(tick, wait);
+      };
+      el.textContent = "";
+      setTimeout(tick, 600 + n * 900);
+    });
+  }
+</script>
+
 <style>
-  .links {
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    padding-top: 200px;
+    padding-bottom: 260px;
+    background: linear-gradient(
+      180deg,
+      #2b0607 0%,
+      #3a0909 18%,
+      #521009 34%,
+      #8a1d0c 50%,
+      #c8330f 62%,
+      #ec5a2a 70%,
+      #f6a98c 80%,
+      #fde7de 90%,
+      #ffffff 100%
+    );
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+  }
+
+  .headline {
+    font-size: clamp(36px, 4.6vw, 60px);
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .headline span {
+    display: block;
+  }
+
+  .headline .bright {
+    color: #fff;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 64px;
+  }
+
+  .hbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    height: 36px;
+    padding: 0 11px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .hbtn-solid {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .hbtn-solid:hover {
+    background: #f1ece9;
+  }
+
+  .hbtn-soft {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+
+  .hbtn-soft:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  /* Floating mono fragments */
+  .snippets {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
     display: none;
   }
 
-  @media (min-width: 50em) {
-    .hero {
-      display: grid;
-    }
-
-    .links {
-      margin-top: 0.5rem;
-      display: flex;
-      gap: 0.5rem;
-    }
-  }
-
-  /* ====================================================== */
-
-  .section {
-    display: grid;
-    gap: 2rem;
-  }
-
-  .with-background {
-    position: relative;
-  }
-
-  .with-background::before {
-    --hero-bg: var(--bg-image-subtle-2);
-
-    content: "";
+  .snip {
     position: absolute;
-    pointer-events: none;
-    left: 50%;
-    width: 100vw;
-    aspect-ratio: calc(2.25 / var(--bg-scale));
-    top: 0;
-    transform: translateY(-75%) translateX(-50%);
-    background:
-      url("/assets/backgrounds/noise.png") top center/220px repeat,
-      var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-      var(--gray-999);
-    background-blend-mode: overlay, normal, normal, normal;
-    mix-blend-mode: var(--bg-blend-mode);
-    z-index: -1;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: pre;
+    animation: drift 9s ease-in-out var(--d) infinite alternate;
   }
 
-  .with-background.bg-variant::before {
-    --hero-bg: var(--bg-image-subtle-1);
+  .snip.typing::after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 12px;
+    margin-left: 1px;
+    vertical-align: -2px;
+    background: rgba(255, 255, 255, 0.8);
+    animation: blink 1s steps(1) infinite;
   }
 
-  .section-header {
-    justify-self: center;
-    text-align: center;
-    max-width: 50ch;
-    font-size: var(--text-md);
-    color: var(--gray-300);
-  }
-
-  .section-header h3 {
-    font-size: var(--text-2xl);
-  }
-
-  @media (min-width: 50em) {
-    .section {
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-areas: "header header header header" "gallery gallery gallery gallery";
-      gap: 5rem;
+  @keyframes drift {
+    from {
+      transform: translateY(0);
+      opacity: 0.55;
     }
-
-    .section.with-cta {
-      grid-template-areas: "header header header cta" "gallery gallery gallery gallery";
-    }
-
-    .section-header {
-      grid-area: header;
-      font-size: var(--text-lg);
-    }
-
-    .section-header h3 {
-      font-size: var(--text-4xl);
-    }
-
-    .with-cta .section-header {
-      justify-self: flex-start;
-      text-align: left;
-    }
-
-    .gallery {
-      grid-area: gallery;
-    }
-
-    .cta {
-      grid-area: cta;
+    to {
+      transform: translateY(-10px);
+      opacity: 1;
     }
   }
 
-  /* ====================================================== */
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .snippets {
+      display: block;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .snip {
+      animation: none;
+    }
+  }
+
+  /* ---------- Feature cards ---------- */
+  .features {
+    position: relative;
+    z-index: 2;
+    margin-top: -180px;
+    display: grid;
+    gap: 96px;
+    padding-bottom: 140px;
+    max-width: 1000px;
+  }
+
+  .work-split {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .pane {
+    min-width: 0;
+  }
+
+  .pane-left {
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pane-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .pane-title {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+
+  .fake-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 46px;
+    padding: 0 8px 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--faint);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+
+  kbd {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+
+  .all-link {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .all-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .pane-right {
+    background: var(--surface);
+  }
+
+  .pane-bar {
+    display: flex;
+    justify-content: space-between;
+    height: 48px;
+    align-items: center;
+    padding: 0 18px;
+    font-size: 13px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .faint {
+    color: var(--faint);
+  }
+
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  @media (min-width: 860px) {
+    .work-split {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+    .pane-left {
+      padding: 44px;
+      border-bottom: 0;
+      border-right: 1px solid var(--line);
+    }
+    .hero {
+      padding-top: 240px;
+      padding-bottom: 300px;
+    }
+    .features {
+      margin-top: -220px;
+      gap: 120px;
+    }
+  }
 </style>

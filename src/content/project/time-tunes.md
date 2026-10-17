@@ -5,6 +5,7 @@ projectType: Web App
 img: /assets/TimeTunesLogo.webp
 img_alt: TimeTunes Logo
 githubCode: https://github.com/ORomero227/TimeTunes
+liveUrl: https://time-tunes.vercel.app/
 images:
   - url: /assets/TimeTunesLogo.webp
   - url: /assets/project_images/timetunes_image_1.webp

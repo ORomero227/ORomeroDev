@@ -1,0 +1,87 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate, projectStatus } from "../data/profile";
+
+interface Props {
+  project: CollectionEntry<"project">;
+  showThumb?: boolean;
+}
+
+const { project, showThumb = false } = Astro.props;
+const { data } = project;
+const status = projectStatus(data);
+---
+
+<li class="row" data-kind={data.projectType}>
+  <a href={`/project/${project.id}/`} class="row-link">
+    {showThumb && <img src={data.img} alt="" class="thumb" loading="lazy" width="48" height="48" />}
+    <div class="row-main">
+      <p class="row-title">
+        {data.title} <span class="sep">—</span> <span class="row-type">{data.projectType}</span>
+      </p>
+      <p class="row-date">{formatDate(data.publishDate)}</p>
+    </div>
+    <span class:list={["pill", status.tone]}>{status.label}</span>
+  </a>
+</li>
+
+<style>
+  .row + .row {
+    border-top: 1px solid var(--line);
+  }
+
+  .row-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .row-link:hover {
+    background: var(--surface);
+  }
+
+  .thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    flex: none;
+  }
+
+  .row-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .row-title {
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sep,
+  .row-type {
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .row-date {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 480px) {
+    .sep,
+    .row-type {
+      display: none;
+    }
+  }
+</style>

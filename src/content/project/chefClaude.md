@@ -5,6 +5,7 @@ projectType: Web App
 img: /assets/ChefClaude.webp
 img_alt: Chef Claude Project Logo
 githubCode: https://github.com/ORomero227/ChefClaude
+liveUrl: https://chefclaude-cuisine.vercel.app/
 shortDescription: |
   A React app styled with Tailwind CSS, using the Claude AI API to generate recipes based on user ingredients.
 description: |

@@ -1,0 +1,373 @@
+---
+/**
+ * Animated "ask your contracts"-style Q&A about Oscar's work.
+ * Answers are written by hand from the project content — no API calls.
+ */
+const qa = [
+  {
+    q: "What does Oscar build?",
+    a: "Full-stack work across <strong>web</strong>, <strong>Android</strong> and <strong>backend</strong> — from React front-ends to ASP.NET and Flask services, plus a desktop POS in Visual Basic.",
+    src: { title: "Projects", meta: "7 projects · 2019 – 2025", href: "/project/", quote: "Web apps, a <strong>Jetpack Compose</strong> Android app, a <strong>SQL Server</strong>-backed desktop POS and a Python automation script." },
+  },
+  {
+    q: "Has he shipped anything with AI?",
+    a: "Yes. <strong>Chef Claude</strong> turns <strong>four or more ingredients</strong> into a complete recipe using the <strong>Claude API</strong>, with responses validated by Zod.",
+    src: { title: "Chef Claude", meta: "Web App · Features", href: "/project/chefclaude/", quote: "Enter at least <strong>4 ingredients</strong> and get a complete, creative recipe suggestion." },
+  },
+  {
+    q: "What's his backend experience?",
+    a: "<strong>ASP.NET MVC</strong> with <strong>SQL Server</strong> and Entity Framework, and <strong>Flask</strong> apps with authentication and admin roles.",
+    src: { title: "Chill's Restaurant", meta: "Web App · Features", href: "/project/chills-restaurant/", quote: "<strong>Role-based access control</strong> with distinct roles for Admin, Employee, Kitchen Staff and Clients." },
+  },
+  {
+    q: "Where did he study?",
+    a: "<strong>B.S. in Computer Science</strong> at Inter American University — Bayamón, finished in <strong>May 2024</strong>, plus the Google Cybersecurity certificate.",
+    src: { title: "About", meta: "Education", href: "/about/", quote: "Bachelor of Science in Computer Science · <strong>Aug 2020 – May 2024</strong>." },
+  },
+];
+---
+
+<div class="window ask" data-ask>
+  <div class="window-bar">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <span><strong>Ask</strong> · oromero</span>
+    <span class="hint">Sample answers</span>
+  </div>
+
+  <div class="ask-body">
+    <div class="ask-intro">
+      <h3>My work has answers.</h3>
+      <p class="muted">Ask a question. Get straight to the relevant project.</p>
+    </div>
+
+    <div class="thread" aria-live="polite">
+      <div class="msg-user" data-q>{qa[0].q}</div>
+      <div class="thinking" data-thinking hidden>
+        <span class="shimmer">Reading his projects…</span>
+      </div>
+      <div class="answer" data-answer>
+        <p data-a set:html={qa[0].a} />
+        <a class="source" data-src-link href={qa[0].src.href}>
+          <span class="source-head">
+            <span class="source-title" data-src-title>{qa[0].src.title}</span>
+            <span class="source-meta" data-src-meta>{qa[0].src.meta}</span>
+          </span>
+          <blockquote data-src-quote set:html={`“${qa[0].src.quote}”`} />
+        </a>
+      </div>
+    </div>
+
+    <div class="composer">
+      <div class="chips" role="tablist" aria-label="Sample questions">
+        {
+          qa.map((item, i) => (
+            <button
+              type="button"
+              class="chip"
+              role="tab"
+              aria-selected={i === 0 ? "true" : "false"}
+              data-idx={i}
+            >
+              {item.q}
+            </button>
+          ))
+        }
+      </div>
+      <div class="input">
+        <span class="placeholder">Ask about a project…</span>
+        <kbd>Enter</kbd>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ qa }}>
+  const root = document.querySelector("[data-ask]");
+  if (root) {
+    const $ = (s) => root.querySelector(s);
+    const qEl = $("[data-q]");
+    const thinking = $("[data-thinking]");
+    const answer = $("[data-answer]");
+    const chips = [...root.querySelectorAll(".chip")];
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let idx = 0;
+    let timer;
+    let userPicked = false;
+
+    const show = (i) => {
+      idx = i;
+      const item = qa[i];
+      chips.forEach((c, n) => c.setAttribute("aria-selected", n === i ? "true" : "false"));
+      qEl.textContent = item.q;
+      $("[data-a]").innerHTML = item.a;
+      $("[data-src-title]").textContent = item.src.title;
+      $("[data-src-meta]").textContent = item.src.meta;
+      $("[data-src-quote]").innerHTML = `“${item.src.quote}”`;
+      $("[data-src-link]").href = item.src.href;
+
+      if (reduce) return;
+      answer.classList.remove("in");
+      answer.hidden = true;
+      thinking.hidden = false;
+      qEl.classList.remove("in");
+      void qEl.offsetWidth;
+      qEl.classList.add("in");
+      setTimeout(() => {
+        thinking.hidden = true;
+        answer.hidden = false;
+        void answer.offsetWidth;
+        answer.classList.add("in");
+      }, 1100);
+    };
+
+    const loop = () => {
+      clearTimeout(timer);
+      if (userPicked || reduce) return;
+      timer = setTimeout(() => {
+        show((idx + 1) % qa.length);
+        loop();
+      }, 6500);
+    };
+
+    root.closest("[data-feature]")?.addEventListener("feature:pause", (e) => {
+      if (e.detail.paused) {
+        userPicked = true;
+        clearTimeout(timer);
+      } else {
+        userPicked = false;
+        show((idx + 1) % qa.length);
+        loop();
+      }
+    });
+
+    chips.forEach((c) =>
+      c.addEventListener("click", () => {
+        userPicked = true;
+        clearTimeout(timer);
+        show(Number(c.dataset.idx));
+      })
+    );
+
+    // Start cycling only once visible.
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        io.disconnect();
+        show(0);
+        loop();
+      }
+    });
+    io.observe(root);
+  }
+</script>
+
+<style>
+  .hint {
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  .ask-body {
+    background: var(--surface);
+    padding: 40px 20px 20px;
+  }
+
+  .ask-intro {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .ask-intro h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(24px, 3.2vw, 32px);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  .thread {
+    max-width: 640px;
+    margin: 0 auto;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .msg-user {
+    align-self: flex-end;
+    max-width: 85%;
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 14px 14px 4px 14px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .msg-user.in {
+    animation: rise 0.35s ease both;
+  }
+
+  .thinking {
+    font-size: 14px;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, var(--faint) 20%, var(--ink) 50%, var(--faint) 80%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.4s linear infinite;
+  }
+
+  .answer {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  .answer.in {
+    animation: rise 0.45s ease both;
+  }
+
+  .answer :global(strong) {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .source {
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .source:hover {
+    border-color: var(--line-strong);
+  }
+
+  .source-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .source-title {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .source-meta {
+    color: var(--muted);
+  }
+
+  .source blockquote {
+    margin: 0;
+    padding-left: 12px;
+    border-left: 2px solid var(--line-strong);
+    font-family: var(--font-serif);
+    font-size: 16.5px;
+    color: var(--ink-2);
+  }
+
+  .composer {
+    max-width: 640px;
+    margin: 28px auto 0;
+  }
+
+  .chips {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+  }
+
+  .chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex: none;
+    font: inherit;
+    font-size: 13px;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+  }
+
+  .chip:hover {
+    color: var(--ink);
+  }
+
+  .chip[aria-selected="true"] {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    padding: 0 8px 0 16px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .placeholder {
+    color: var(--faint);
+  }
+
+  kbd {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: -100% 0;
+    }
+  }
+
+  @media (min-width: 720px) {
+    .ask-body {
+      padding: 64px 40px 40px;
+    }
+  }
+</style>

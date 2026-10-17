@@ -1,295 +1,173 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ContactCTA from "../components/ContactCTA.astro";
-
-const profile = {
-  name: "Oscar Romero Barbosa",
-  title: "Full Stack Developer",
-  location: "Puerto Rico",
-  summary: `Passionate about building digital solutions that make a real impact. Specialized in modern technologies like React, Node.js, and Python. Focused on writing clean, scalable, and maintainable code, always following best practices and staying up-to-date with the latest trends in development.`,
-  image: "/assets/at-work.jpg",
-};
-
-const education = [
-  {
-    type: "degree",
-    title: "Bachelor of Science in Computer Science",
-    institution: "Inter American University of Puerto Rico - Bayamón",
-    startDate: "Aug 2020",
-    endDate: "May 2024",
-    achivements: [],
-  },
-  {
-    type: "certification",
-    title: "Google Cybersecurity Professional Certificate",
-    institution: "Coursera - Google",
-    endDate: "Aug 2024",
-    description:
-      "Experienced in Linux, SIEM tools, and IDS, with a strong ability to identify and mitigate cybersecurity risks, threats, and vulnerabilities.",
-    achivements: [],
-  },
-];
-
-const skills = [
-  {
-    category: "Programming Languages",
-    technologies: ["C#", "Python", "Typescript", "SQL"],
-  },
-  {
-    category: "Front-End",
-    technologies: ["HTML", "CSS", "React", "Astro", "Tailwind"],
-  },
-  {
-    category: "Back-End",
-    technologies: ["ASP.Net", "Flask"],
-  },
-  {
-    category: "Mobile",
-    technologies: ["Android SDK", "Compose", "Kotlin", "React Native"],
-  },
-  {
-    category: "Databases",
-    technologies: ["MySQL", "SQL Server", "Firebase"],
-  },
-  {
-    category: "Tools",
-    technologies: ["Git", "Github", "Postman", "Github Copilot"],
-  },
-];
+import SignCTA from "../components/SignCTA.astro";
+import { profile, education, skills } from "../data/profile";
 ---
 
-<BaseLayout title="About | Oscar Romero" description="About Oscar Romero">
-  <main class="about-modern">
-    <section class="hero-modern">
-      <div class="hero-info">
-        <h1>{profile.name}</h1>
-        <h2>{profile.title}</h2>
-        <p class="location">{profile.location}</p>
-        <p class="summary">{profile.summary}</p>
+<BaseLayout title="About — Oscar Romero" description="About Oscar Romero, full-stack developer in Puerto Rico.">
+  <main>
+    <section class="container head">
+      <p class="eyebrow">About</p>
+      <h1>
+        <span class="faint">Hi, I'm Oscar.</span>
+        {profile.role} in {profile.location}.
+      </h1>
+      <p class="lead">{profile.summary}</p>
+      <div class="actions">
+        <a href={`mailto:${profile.email}`} class="btn btn-primary">Contact me</a>
+        <a href={profile.cv} target="_blank" rel="noopener" class="btn btn-outline">Download CV</a>
+        <a href={profile.linkedin} target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
       </div>
     </section>
 
-    <section class="section-block">
-      <h2 class="section-title">Education and Certifications</h2>
-      <div class="education-modern-grid">
+    <section class="container block">
+      <div class="block-head">
+        <h2>Education &amp; certifications</h2>
+      </div>
+      <ul class="table">
         {
-          education.map((edu) => (
-            <div class="education-modern-card">
-              <h3>{edu.title}</h3>
-              <p class="institution">{edu.institution}</p>
-              <span class="date">
-                {edu.startDate
-                  ? `${edu.startDate} - ${edu.endDate}`
-                  : `Finalizado: ${edu.endDate}`}
-              </span>
-              {edu.description && <p class="desc">{edu.description}</p>}
-            </div>
+          education.map((e) => (
+            <li class="trow">
+              <div class="tmain">
+                <p class="ttitle">{e.title}</p>
+                <p class="tsub">{e.institution}</p>
+                {e.description && <p class="tdesc">{e.description}</p>}
+              </div>
+              <div class="tside">
+                <span class="tdate">{e.date}</span>
+                <span class="pill pill-green">{e.status}</span>
+              </div>
+            </li>
           ))
         }
-      </div>
+      </ul>
     </section>
 
-    <section class="section-block">
-      <h2 class="section-title">Skills</h2>
-      <div class="skills-modern-grid">
+    <section class="container block">
+      <div class="block-head">
+        <h2>Skills</h2>
+      </div>
+      <div class="table skills">
         {
-          skills.map((skill) => (
-            <div class="skill-modern-card">
-              <h3>{skill.category}</h3>
-              <ul>
-                {skill.technologies.map((tech) => (
-                  <li>{tech}</li>
+          skills.map((s) => (
+            <div class="srow">
+              <p class="scat">{s.category}</p>
+              <div class="sitems">
+                {s.items.map((i) => (
+                  <span class="tag">{i}</span>
                 ))}
-              </ul>
+              </div>
             </div>
           ))
         }
       </div>
     </section>
+
+    <SignCTA />
   </main>
-
-  <div class="stack gap-20">
-    <ContactCTA />
-  </div>
-
-  <style>
-    .about-modern {
-      display: flex;
-      flex-direction: column;
-      gap: 3.5rem;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem 1.5rem;
-    }
-
-    .hero-modern {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-      background: var(--gray-999_40);
-      border-radius: 1.5rem;
-      box-shadow: var(--shadow-md);
-      padding: 2.5rem 1.5rem;
-    }
-
-    .profile-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 24px 0 #001a33cc;
-      border: 3px solid var(--gray-800);
-      background: var(--gray-900);
-    }
-
-    .hero-info {
-      text-align: center;
-    }
-
-    .hero-info h1 {
-      font-size: 2.2rem;
-      color: var(--gray-0);
-      margin-bottom: 0.2rem;
-    }
-
-    .hero-info h2 {
-      font-size: 1.2rem;
-      color: var(--gray-200);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .location {
-      color: var(--gray-500);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .summary {
-      color: var(--gray-200);
-      font-size: 1.1rem;
-      margin-bottom: 0;
-    }
-
-    .section-block {
-      margin-top: 1.5rem;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      color: var(--gray-0);
-      margin-bottom: 1.2rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-    }
-
-    .education-modern-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .education-modern-card {
-      background: var(--gray-999_40);
-      border-radius: 1rem;
-      box-shadow: var(--shadow-sm);
-      padding: 1.5rem 1.2rem;
-      border: 1px solid var(--gray-800);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .education-modern-card h3 {
-      font-size: 1.1rem;
-      color: var(--gray-0);
-      margin-bottom: 0.2rem;
-      font-weight: 600;
-    }
-
-    .institution {
-      color: var(--gray-200);
-      font-size: 1rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .date {
-      color: var(--gray-500);
-      font-size: 0.95rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .desc {
-      color: var(--gray-200);
-      font-size: 0.98rem;
-    }
-
-    .skills-modern-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .skill-modern-card {
-      background: var(--gray-999_40);
-      border-radius: 1rem;
-      box-shadow: var(--shadow-sm);
-      padding: 1.2rem 1rem;
-      border: 1px solid var(--gray-800);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-start;
-    }
-
-    .skill-modern-card h3 {
-      font-size: 1.05rem;
-      color: var(--gray-0);
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .skill-modern-card ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-    }
-
-    .skill-modern-card li {
-      color: var(--gray-200);
-      font-size: 0.98rem;
-      background: var(--gray-900_60);
-      border-radius: 0.5rem;
-      padding: 0.2rem 0.7rem;
-      font-weight: 500;
-    }
-
-    @media (min-width: 50em) {
-      .about-modern {
-        padding: 3.5rem 0 5rem 0;
-      }
-
-      .hero-modern {
-        flex-direction: row;
-        align-items: center;
-        gap: 3rem;
-        text-align: left;
-      }
-
-      .hero-info {
-        text-align: left;
-      }
-
-      .education-modern-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .skills-modern-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-  </style>
 </BaseLayout>
+
+<style>
+  .head {
+    padding-top: 72px;
+    padding-bottom: 80px;
+  }
+
+  h1 {
+    font-size: clamp(36px, 5.6vw, 64px);
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 12px 0 20px;
+    max-width: 16ch;
+  }
+
+  .faint {
+    color: var(--faint);
+  }
+
+  .lead {
+    font-size: 19px;
+    color: var(--ink-2);
+    max-width: 58ch;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+  }
+
+  .block {
+    padding-bottom: 72px;
+  }
+
+  .block-head h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .table {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .trow,
+  .srow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding: 18px 20px;
+  }
+
+  .trow + .trow,
+  .srow + .srow {
+    border-top: 1px solid var(--line);
+  }
+
+  .ttitle {
+    font-weight: 500;
+  }
+
+  .tsub,
+  .tdesc {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin-top: 2px;
+  }
+
+  .tdesc {
+    max-width: 60ch;
+    margin-top: 6px;
+  }
+
+  .tside {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .srow {
+    align-items: center;
+  }
+
+  .scat {
+    font-size: 14px;
+    color: var(--muted);
+    width: 120px;
+  }
+
+  .sitems {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+</style>

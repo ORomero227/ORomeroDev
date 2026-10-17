@@ -1,71 +1,106 @@
 ---
-import Icon from "./Icon.astro";
-const currentYear = new Date().getFullYear();
+import { profile } from "../data/profile";
+const year = new Date().getFullYear();
 ---
 
-<footer>
-  <div class="group">
-    <p>&copy; {currentYear} Oscar Romero Barbosa</p>
+<footer class="footer">
+  <div class="container">
+    <a href="/" class="mark" aria-label="Home">/</a>
+
+    <div class="grid">
+      <p class="about">
+        Oscar Romero is a full-stack developer based in {profile.location}. He builds web apps,
+        Android apps and the backends behind them — with a soft spot for clean code and
+        software that saves people time.
+      </p>
+
+      <div class="col">
+        <h2>Site</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/project/">Projects</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href={profile.cv} target="_blank" rel="noopener">Download CV</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h2>Contact</h2>
+        <ul>
+          <li><a href={`mailto:${profile.email}`}>Email</a></li>
+          <li><a href={profile.github} target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="copy">© {year} {profile.name}</p>
   </div>
-  <p class="socials">
-    <a href="https://github.com/ORomero227" target="_blank"> GitHub</a>
-    <a href="https://www.linkedin.com/in/oscar-romero-barbosa/" target="_blank">
-      LinkedIn</a
-    >
-  </p>
 </footer>
+
 <style>
-  footer {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+  .footer {
     margin-top: auto;
-    padding: 3rem 2rem 3rem;
-    text-align: center;
-    color: var(--gray-400);
-    font-size: var(--text-sm);
+    border-top: 1px solid var(--line);
+    padding: 56px 0 40px;
+    font-size: 14px;
   }
 
-  footer a {
-    color: var(--gray-400);
-    text-decoration: 1px solid underline transparent;
-    text-underline-offset: 0.25em;
-    transition: text-decoration-color var(--theme-transition);
+  .mark {
+    display: inline-block;
+    font-size: 26px;
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 28px;
   }
 
-  footer a:hover,
-  footer a:focus {
-    text-decoration-color: currentColor;
+  .grid {
+    display: grid;
+    gap: 36px;
+    grid-template-columns: 1fr;
   }
 
-  .group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  .about {
+    color: var(--muted);
+    max-width: 46ch;
+    line-height: 1.6;
   }
 
-  .socials {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+  h2 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0;
+    margin-bottom: 12px;
   }
 
-  @media (min-width: 50em) {
-    footer {
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 2.5rem 5rem;
-    }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
 
-    .group {
-      flex-direction: row;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+  ul a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
 
-    .socials {
-      justify-content: flex-end;
+  ul a:hover {
+    color: var(--ink);
+  }
+
+  .copy {
+    margin-top: 48px;
+    color: var(--faint);
+    font-size: 13px;
+  }
+
+  @media (min-width: 720px) {
+    .grid {
+      grid-template-columns: 2fr 1fr 1fr;
     }
   }
 </style>

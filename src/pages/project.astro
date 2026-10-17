@@ -1,35 +1,129 @@
 ---
 import { getCollection } from "astro:content";
-
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-import ContactCTA from "../components/ContactCTA.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
-import Hero from "../components/Hero.astro";
-import Grid from "../components/Grid.astro";
+import ProjectRow from "../components/ProjectRow.astro";
+import SignCTA from "../components/SignCTA.astro";
 
 const projects = (await getCollection("project")).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
+const types = ["All", ...new Set(projects.map((p) => p.data.projectType))];
 ---
 
-<BaseLayout
-  title="My Projects | Oscar Romero"
-  description="Learn about Oscar Romero most recent projects"
->
-  <div class="stack gap-20">
-    <main class="wrapper stack gap-8">
-      <Hero title="My Projects" align="start" />
-      <Grid variant="offset">
-        {
-          projects.map((project) => (
-            <li>
-              <PortfolioPreview project={project} />
-            </li>
-          ))
-        }
-      </Grid>
-    </main>
-    <ContactCTA />
-  </div>
+<BaseLayout title="Projects — Oscar Romero" description="Everything Oscar Romero has built.">
+  <main>
+    <section class="container head">
+      <p class="eyebrow">{projects.length} projects</p>
+      <h1>Projects</h1>
+      <p class="lead">Web, mobile, desktop and automation. Click any one to open the full write-up.</p>
+    </section>
+
+    <section class="container list-wrap">
+      <div class="window">
+        <div class="window-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span><strong>oromero</strong> / projects</span>
+          <span class="count" data-count>{projects.length} shown</span>
+        </div>
+        <div class="filters" role="tablist" aria-label="Filter by type">
+          {
+            types.map((t, i) => (
+              <button type="button" class="filter" role="tab" aria-selected={i === 0 ? "true" : "false"} data-type={t}>
+                {t}
+              </button>
+            ))
+          }
+        </div>
+        <ul class="rows" data-rows>
+          {
+            projects.map((p) => <ProjectRow project={p} showThumb />)
+          }
+        </ul>
+      </div>
+    </section>
+
+    <SignCTA />
+  </main>
 </BaseLayout>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>(".filter");
+  const rows = document.querySelectorAll<HTMLElement>("[data-rows] > li");
+  const count = document.querySelector("[data-count]");
+  filters.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const t = btn.dataset.type;
+      filters.forEach((b) => b.setAttribute("aria-selected", b === btn ? "true" : "false"));
+      let n = 0;
+      rows.forEach((r) => {
+        const show = t === "All" || r.dataset.kind === t;
+        r.hidden = !show;
+        if (show) n++;
+      });
+      if (count) count.textContent = `${n} shown`;
+    })
+  );
+</script>
+
+<style>
+  .head {
+    padding-top: 72px;
+    padding-bottom: 40px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    letter-spacing: -0.035em;
+    margin: 10px 0 12px;
+  }
+
+  .lead {
+    color: var(--muted);
+    font-size: 18px;
+    max-width: 52ch;
+  }
+
+  .list-wrap {
+    padding-bottom: 120px;
+  }
+
+  .count {
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  .filters {
+    display: flex;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .filter {
+    flex: none;
+    font: inherit;
+    font-size: 13px;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .filter[aria-selected="true"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+</style>

@@ -88,13 +88,25 @@ const { images } = Astro.props;
 <style>
   .swiper {
     width: 100%;
-    max-width: 65ch;
-    margin-inline: auto;
+  }
+
+  .swiper-slide img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: contain;
+    background: var(--surface);
   }
 
   .swiper-button-next,
   .swiper-button-prev {
-    color: var(--accent-dark);
+    --swiper-navigation-size: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
   .lightbox-overlay {

@@ -1,8 +1,25 @@
 ---
-import Hero from '../components/Hero.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Not Found" description="404 Error — this page was not found">
-	<Hero title="Page Not Found" tagline="Not found" />
+<BaseLayout title="Not found — Oscar Romero" description="404 — this page was not found">
+  <main class="container nf">
+    <span class="pill">404</span>
+    <h1>This page was never signed.</h1>
+    <p class="muted">It doesn't exist, or it moved.</p>
+    <a href="/" class="btn btn-primary">Back home</a>
+  </main>
 </BaseLayout>
+
+<style>
+  .nf {
+    padding: 120px var(--gutter) 160px;
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+  }
+  h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    letter-spacing: -0.035em;
+  }
+</style>

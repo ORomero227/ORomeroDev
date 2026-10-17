@@ -7,14 +7,18 @@ interface Props {
 }
 
 const {
-  title = "Oscar Romero: Portfolio",
-  description = "The portfolio of Oscar Romero",
+  title = "Oscar Romero — Full-Stack Developer",
+  description = "Oscar Romero builds web, mobile and backend software from Puerto Rico.",
 } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
-<meta name="description" property="og:description" content={description} />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta name="theme-color" content="#ffffff" />
+<meta name="color-scheme" content="light" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 
@@ -22,11 +26,6 @@ const {
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500&display=swap"
   rel="stylesheet"
 />
-<script is:inline>
-  // This code is inlined in the head to make dark mode instant & blocking.
-  // Forzar siempre el tema oscuro y eliminar lógica de preferencia de tema
-  document.documentElement.classList.add("theme-dark");
-</script>

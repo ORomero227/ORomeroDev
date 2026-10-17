@@ -1,0 +1,128 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  id?: string;
+  pausable?: boolean;
+}
+const { title, description, id, pausable = false } = Astro.props;
+---
+
+<section class="feature-card" id={id} data-feature>
+  <header class="fc-head">
+    <div>
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+    {
+      pausable && (
+        <button type="button" class="fc-pause" data-pause aria-pressed="false" aria-label="Pause animation">
+          <svg class="i-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+            <rect x="3" y="2" width="3" height="10" rx="1" fill="currentColor" />
+            <rect x="8" y="2" width="3" height="10" rx="1" fill="currentColor" />
+          </svg>
+          <svg class="i-play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+            <path d="M4 2.2v9.6L12 7z" fill="currentColor" />
+          </svg>
+        </button>
+      )
+    }
+  </header>
+  <div class="fc-body">
+    <slot />
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-pause]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const paused = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", String(paused));
+      btn.setAttribute("aria-label", paused ? "Play animation" : "Pause animation");
+      btn.closest("[data-feature]")?.dispatchEvent(new CustomEvent("feature:pause", { detail: { paused } }));
+    });
+  });
+</script>
+
+<style>
+  .feature-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 30px 80px -30px rgba(60, 10, 5, 0.25), 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+
+  .fc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 24px 26px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fc-head h2 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin-bottom: 6px;
+  }
+
+  .fc-head p {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 60ch;
+  }
+
+  .fc-pause {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--surface-2);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .fc-pause:hover {
+    background: var(--line);
+  }
+
+  .fc-pause .i-play,
+  .fc-pause[aria-pressed="true"] .i-pause {
+    display: none;
+  }
+
+  .fc-pause[aria-pressed="true"] .i-play {
+    display: block;
+  }
+
+  /* Inner windows lose their own frame when nested in a card */
+  .fc-body :global(.window) {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .fc-body :global(.window .dots) {
+    visibility: hidden;
+  }
+
+  @media (min-width: 720px) {
+    .fc-head {
+      padding: 44px 44px 40px;
+    }
+    .fc-head h2 {
+      font-size: 19px;
+    }
+    .fc-head p {
+      font-size: 17px;
+    }
+  }
+</style>
