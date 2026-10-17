@@ -13,6 +13,13 @@ export const profile = {
 
 export const education = [
   {
+    kind: "Certification",
+    title: "AWS Certified Cloud Practitioner",
+    institution: "Amazon Web Services",
+    date: "Oct 2026",
+    status: "Certified",
+  },
+  {
     kind: "Degree",
     title: "B.S. in Computer Science",
     institution: "Inter American University of Puerto Rico — Bayamón",
@@ -31,12 +38,12 @@ export const education = [
 ];
 
 export const skills = [
-  { category: "Languages", items: ["C#", "Python", "TypeScript", "Kotlin", "SQL"] },
-  { category: "Front-end", items: ["React", "Astro", "Tailwind", "HTML", "CSS"] },
-  { category: "Back-end", items: ["ASP.NET", "Flask", "Node.js"] },
+  { category: "Languages", items: ["TypeScript", "Java", "PHP", "SQL"] },
+  { category: "Front-end", items: ["React", "Angular", "Astro", "Tailwind"] },
+  { category: "Back-end", items: ["Express", "Laravel", "Spring Boot"] },
   { category: "Mobile", items: ["Android SDK", "Jetpack Compose", "React Native"] },
-  { category: "Databases", items: ["SQL Server", "MySQL", "Firebase"] },
-  { category: "Tools", items: ["Git", "GitHub", "Postman", "Copilot"] },
+  { category: "Databases", items: ["PostgreSQL", "SQL Server", "MySQL", "Firebase"] },
+  { category: "Tools", items: ["Git", "GitHub", "GitLab", "Docker", "Postman", "Claude Code"] },
 ];
 
 /** Formats a date like "March 3, 2024" */
