@@ -44,6 +44,7 @@ export const skills = [
   { category: "Mobile", items: ["Android SDK", "Jetpack Compose", "React Native"] },
   { category: "Databases", items: ["PostgreSQL", "SQL Server", "MySQL", "Firebase"] },
   { category: "Tools", items: ["Git", "GitHub", "GitLab", "Docker", "Postman", "Claude Code"] },
+  { category: "Environment", items: ["macOS", "Cursor", "Terminal"] },
 ];
 
 /** Formats a date like "March 3, 2024" */
