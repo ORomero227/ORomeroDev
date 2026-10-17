@@ -1,25 +1,27 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
 ---
 
-<BaseLayout title="Not found — Oscar Romero" description="404 — this page was not found">
-  <main class="container nf">
-    <span class="pill">404</span>
-    <h1>This page was never signed.</h1>
-    <p class="muted">It doesn't exist, or it moved.</p>
-    <a href="/" class="btn btn-primary">Back home</a>
+<BaseLayout title="Not found — Oscar Romero" description="404 — this page was not found" navVariant="dark">
+  <main>
+    <PageHero eyebrow="404" muted="This page was never signed." title="It doesn't exist, or it moved.">
+      <div class="actions">
+        <a href="/" class="hbtn hbtn-solid">Back home</a>
+        <a href="/project/" class="hbtn hbtn-soft">See projects</a>
+      </div>
+    </PageHero>
   </main>
 </BaseLayout>
 
 <style>
-  .nf {
-    padding: 120px var(--gutter) 160px;
-    display: grid;
-    justify-items: start;
-    gap: 16px;
+  main {
+    padding-bottom: 80px;
   }
-  h1 {
-    font-size: clamp(32px, 5vw, 56px);
-    letter-spacing: -0.035em;
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 40px;
   }
 </style>

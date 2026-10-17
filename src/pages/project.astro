@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectRow from "../components/ProjectRow.astro";
 import SignCTA from "../components/SignCTA.astro";
+import PageHero from "../components/PageHero.astro";
 
 const projects = (await getCollection("project")).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
@@ -10,13 +11,15 @@ const projects = (await getCollection("project")).sort(
 const types = ["All", ...new Set(projects.map((p) => p.data.projectType))];
 ---
 
-<BaseLayout title="Projects — Oscar Romero" description="Everything Oscar Romero has built.">
+<BaseLayout title="Projects — Oscar Romero" description="Everything Oscar Romero has built." navVariant="dark">
   <main>
-    <section class="container head">
-      <p class="eyebrow">{projects.length} projects</p>
-      <h1>Projects</h1>
-      <p class="lead">Web, mobile, desktop and automation. Click any one to open the full write-up.</p>
-    </section>
+    <PageHero
+      eyebrow={`${projects.length} projects`}
+      muted="Web, mobile, desktop."
+      title="Everything I've built."
+      lead="Click any project to open the full write-up, screenshots and code."
+      overlap
+    />
 
     <section class="container list-wrap">
       <div class="window">
@@ -66,25 +69,17 @@ const types = ["All", ...new Set(projects.map((p) => p.data.projectType))];
 </script>
 
 <style>
-  .head {
-    padding-top: 72px;
-    padding-bottom: 40px;
-  }
-
-  h1 {
-    font-size: clamp(40px, 6vw, 64px);
-    letter-spacing: -0.035em;
-    margin: 10px 0 12px;
-  }
-
-  .lead {
-    color: var(--muted);
-    font-size: 18px;
-    max-width: 52ch;
-  }
-
   .list-wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin-top: -200px;
     padding-bottom: 120px;
+  }
+
+  .list-wrap .window {
+    border-radius: 18px;
+    box-shadow: 0 30px 80px -30px rgba(60, 10, 5, 0.25), 0 2px 8px -2px rgba(0, 0, 0, 0.05);
   }
 
   .count {

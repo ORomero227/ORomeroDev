@@ -1,0 +1,124 @@
+---
+/**
+ * Gradient page header (same palette as the home hero, shorter).
+ * Use with <BaseLayout navVariant="dark"> so the nav sits on top in white.
+ * `overlap` leaves extra room at the bottom for a card to ride up over the fade.
+ */
+interface Props {
+  eyebrow?: string;
+  title: string;
+  muted?: string;
+  lead?: string;
+  overlap?: boolean;
+}
+const { eyebrow, title, muted, lead, overlap = false } = Astro.props;
+---
+
+<section class:list={["page-hero", overlap && "overlap"]}>
+  <div class="container inner">
+    <slot name="top" />
+    {eyebrow && <p class="ph-eyebrow">{eyebrow}</p>}
+    <h1>
+      {muted && <span class="ph-muted">{muted} </span>}
+      {title}
+    </h1>
+    {lead && <p class="ph-lead">{lead}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    color: #fff;
+    padding: 150px 0 120px;
+    background: linear-gradient(
+      180deg,
+      #2b0607 0%,
+      #3a0909 20%,
+      #5a120a 40%,
+      #9a230d 56%,
+      #d53c14 68%,
+      #ef6a3c 77%,
+      #f7b39a 86%,
+      #fde8df 94%,
+      #ffffff 100%
+    );
+  }
+
+  .page-hero.overlap {
+    padding-bottom: 220px;
+  }
+
+  .inner {
+    max-width: 1000px;
+  }
+
+  .ph-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 5.4vw, 64px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    max-width: 18ch;
+  }
+
+  .ph-muted {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .ph-lead {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 58ch;
+  }
+
+  /* Hero buttons, shared by pages that put actions in the header */
+  .page-hero :global(.hbtn) {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    height: 36px;
+    padding: 0 11px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .page-hero :global(.hbtn-solid) {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .page-hero :global(.hbtn-solid:hover) {
+    background: #f1ece9;
+  }
+
+  .page-hero :global(.hbtn-soft) {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+
+  .page-hero :global(.hbtn-soft:hover) {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  @media (min-width: 720px) {
+    .page-hero {
+      padding: 190px 0 150px;
+    }
+    .page-hero.overlap {
+      padding-bottom: 260px;
+    }
+  }
+</style>

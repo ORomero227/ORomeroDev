@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ImagesSlider from "../../components/ImagesSlider.astro";
 import SignCTA from "../../components/SignCTA.astro";
+import PageHero from "../../components/PageHero.astro";
 import { formatDate, projectStatus } from "../../data/profile";
 
 interface Props {
@@ -21,9 +22,28 @@ const status = projectStatus(data);
 const images = data.images ?? (data.img ? [{ url: data.img, alt: data.img_alt }] : []);
 ---
 
-<BaseLayout title={`${data.title} — Oscar Romero`} description={data.description}>
+<BaseLayout title={`${data.title} — Oscar Romero`} description={data.description} navVariant="dark">
+  <PageHero eyebrow={`${data.projectType} · ${formatDate(data.publishDate)}`} title={data.title} lead={data.description} overlap>
+    <a slot="top" href="/project/" class="back">← All projects</a>
+    <div class="hero-actions">
+      {
+        data.liveUrl && (
+          <a href={data.liveUrl} target="_blank" rel="noopener" class="hbtn hbtn-solid">
+            Open live demo ↗
+          </a>
+        )
+      }
+      {
+        data.githubCode && (
+          <a href={data.githubCode} target="_blank" rel="noopener" class:list={["hbtn", data.liveUrl ? "hbtn-soft" : "hbtn-solid"]}>
+            View code on GitHub
+          </a>
+        )
+      }
+    </div>
+  </PageHero>
+
   <main class="container wrap">
-    <a href="/project/" class="back">← All projects</a>
 
     <div class="window">
       <div class="window-bar">
@@ -34,10 +54,6 @@ const images = data.images ?? (data.img ? [{ url: data.img, alt: data.img_alt }]
 
       <div class="layout">
         <article class="doc paper">
-          <p class="kind">{data.projectType}</p>
-          <h1>{data.title}</h1>
-          <p class="desc">{data.description}</p>
-
           {images.length > 1 ? (
             <div class="media"><ImagesSlider images={images} /></div>
           ) : images.length === 1 ? (
@@ -107,20 +123,35 @@ const images = data.images ?? (data.img ? [{ url: data.img, alt: data.img_alt }]
 
 <style>
   .wrap {
-    padding-top: 40px;
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin-top: -200px;
     padding-bottom: 120px;
+  }
+
+  .wrap .window {
+    border-radius: 18px;
+    box-shadow: 0 30px 80px -30px rgba(60, 10, 5, 0.25), 0 2px 8px -2px rgba(0, 0, 0, 0.05);
   }
 
   .back {
     display: inline-block;
     font-size: 14px;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
   }
 
   .back:hover {
-    color: var(--ink);
+    color: #fff;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 36px;
   }
 
   .layout {
@@ -138,26 +169,8 @@ const images = data.images ?? (data.img ? [{ url: data.img, alt: data.img_alt }]
     min-width: 0;
   }
 
-  .kind {
-    font-family: var(--font-sans);
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  h1 {
-    font-size: clamp(32px, 5vw, 46px);
-    line-height: 1.08;
-    margin-bottom: 14px;
-  }
-
-  .desc {
-    color: var(--ink-2);
-    font-size: 19px;
-  }
-
   .media {
-    margin: 32px 0;
+    margin: 0 0 32px;
     border-radius: var(--radius);
     overflow: hidden;
     border: 1px solid var(--line);

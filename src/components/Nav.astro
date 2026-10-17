@@ -141,6 +141,11 @@ const isCurrent = (href: string) => href !== "/" && path.startsWith(href);
     color: #fff;
   }
 
+  .on-dark .nav-link[aria-current="page"] {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
   .on-dark .btn-ghost {
     color: #fff;
   }

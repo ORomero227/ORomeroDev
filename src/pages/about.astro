@@ -1,24 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SignCTA from "../components/SignCTA.astro";
+import PageHero from "../components/PageHero.astro";
 import { profile, education, skills } from "../data/profile";
 ---
 
-<BaseLayout title="About — Oscar Romero" description="About Oscar Romero, full-stack developer in Puerto Rico.">
+<BaseLayout title="About — Oscar Romero" description="About Oscar Romero, full-stack developer in Puerto Rico." navVariant="dark">
   <main>
-    <section class="container head">
-      <p class="eyebrow">About</p>
-      <h1>
-        <span class="faint">Hi, I'm Oscar.</span>
-        {profile.role} in {profile.location}.
-      </h1>
-      <p class="lead">{profile.summary}</p>
+    <PageHero
+      eyebrow="About"
+      muted="Hi, I'm Oscar."
+      title={`${profile.role} in ${profile.location}.`}
+      lead={profile.summary}
+    >
       <div class="actions">
-        <a href={`mailto:${profile.email}`} class="btn btn-primary">Contact me</a>
-        <a href={profile.cv} target="_blank" rel="noopener" class="btn btn-outline">Download CV</a>
-        <a href={profile.linkedin} target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+        <a href={`mailto:${profile.email}`} class="hbtn hbtn-solid">Contact me</a>
+        <a href={profile.cv} target="_blank" rel="noopener" class="hbtn hbtn-soft">Download CV</a>
+        <a href={profile.linkedin} target="_blank" rel="noopener" class="hbtn hbtn-soft">LinkedIn</a>
       </div>
-    </section>
+    </PageHero>
 
     <section class="container block">
       <div class="block-head">
@@ -68,37 +68,15 @@ import { profile, education, skills } from "../data/profile";
 </BaseLayout>
 
 <style>
-  .head {
-    padding-top: 72px;
-    padding-bottom: 80px;
-  }
-
-  h1 {
-    font-size: clamp(36px, 5.6vw, 64px);
-    letter-spacing: -0.035em;
-    line-height: 1.05;
-    margin: 12px 0 20px;
-    max-width: 16ch;
-  }
-
-  .faint {
-    color: var(--faint);
-  }
-
-  .lead {
-    font-size: 19px;
-    color: var(--ink-2);
-    max-width: 58ch;
-  }
-
   .actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 32px;
+    gap: 6px;
+    margin-top: 40px;
   }
 
   .block {
+    max-width: 1000px;
     padding-bottom: 72px;
   }
 
