@@ -1,1 +1,2 @@
-![709shots_so](https://github.com/user-attachments/assets/b4e0c674-a0e4-4454-96d4-7b5b996e1f3c)
+<img width="1920" height="1080" alt="145shots_so" src="https://github.com/user-attachments/assets/2454014e-06cc-497f-8a36-1679ee7ec500" />
+
