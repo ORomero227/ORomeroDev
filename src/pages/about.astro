@@ -20,33 +20,28 @@ import { profile, experience, education, skills } from "../data/profile";
       </div>
     </PageHero>
 
-    <section class="container block" id="experience">
+    <section class="container block">
       <div class="block-head">
         <h2>Experience</h2>
       </div>
       <ol class="table timeline">
         {
           experience.map((x) => (
-            <li class="trow xrow">
-              <span class:list={["dot", x.current && "dot-current"]} aria-hidden="true" />
-              <div class="tmain">
-                <p class="ttitle">{x.role}</p>
-                <p class="tsub">
-                  {x.company}
-                  {x.location && <> · {x.location}</>}
+            <li class="xrow">
+              <div class="xhead">
+                <p class="ttitle">
+                  {x.company} <span class="xrole">— {x.role}</span>
                 </p>
-                <ul class="xlist">
-                  {x.highlights.map((h) => (
-                    <li>{h}</li>
-                  ))}
-                </ul>
+                <div class="tside">
+                  <span class="tdate">{x.start} – {x.end}</span>
+                  {x.current && <span class="pill pill-green">Current</span>}
+                </div>
               </div>
-              <div class="tside">
-                <span class="tdate">
-                  {x.start} – {x.end}
-                </span>
-                {x.current && <span class="pill pill-green">Current</span>}
-              </div>
+              <ul class="xlist">
+                {x.highlights.map((h) => (
+                  <li>{h}</li>
+                ))}
+              </ul>
             </li>
           ))
         }
@@ -165,69 +160,47 @@ import { profile, experience, education, skills } from "../data/profile";
     color: var(--muted);
   }
 
-  .srow {
-    align-items: center;
+  .timeline {
+    padding: 0;
   }
 
-  /* Experience timeline: a rail with one dot per role */
   .xrow {
-    position: relative;
-    padding-left: 44px;
-    align-items: flex-start;
+    padding: 20px;
   }
 
-  .xrow::before {
-    content: "";
-    position: absolute;
-    left: 24px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: var(--line);
+  .xrow + .xrow {
+    border-top: 1px solid var(--line);
   }
 
-  .xrow:first-child::before {
-    top: 26px;
+  .xhead {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-bottom: 10px;
   }
 
-  .xrow:last-child::before {
-    bottom: calc(100% - 26px);
-  }
-
-  .dot {
-    position: absolute;
-    left: 20px;
-    top: 22px;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #fff;
-    border: 1px solid var(--line-strong);
-  }
-
-  .dot-current {
-    background: var(--green);
-    border-color: var(--green);
-    box-shadow: 0 0 0 4px var(--green-bg);
-  }
-
-  .xrow .tmain {
-    flex: 1 1 420px;
-    min-width: 0;
+  .xrole {
+    color: var(--muted);
+    font-weight: 400;
   }
 
   .xlist {
-    margin: 10px 0 0;
+    margin: 0;
     padding-left: 18px;
     display: grid;
-    gap: 4px;
+    gap: 6px;
     color: var(--ink-2);
-    font-size: 14.5px;
-    max-width: 64ch;
+    font-size: 15px;
+    line-height: 1.55;
   }
 
-  .xrow .tside {
-    white-space: nowrap;
+  .xlist li::marker {
+    color: var(--faint);
+  }
+
+  .srow {
+    align-items: center;
   }
 
   .scat {

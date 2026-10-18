@@ -39,10 +39,10 @@ TimeTunes is a web application that allows you to rediscover music from specific
 > Features
 
 - **Date Selection**: User-friendly calendar interface to choose any historical date
-- **Billboard Chart Scraping**: Automatic retrieval of the top 100 songs from the selected date, with a **94% match rate** against tracks available on Spotify
+- **Billboard Chart Scraping**: Automatic retrieval of the top 100 songs from the selected date — about **94%** of songs are matched on Spotify
 - **Playlist Viewing**: Browse through the historical hits that were popular at that time.
-- **Spotify Integration**: Sign in securely with **OAuth2** and save playlists to your Spotify account for later.
-- **Responsive Design**:
+- **Spotify Integration**: Log in with OAuth2 and save playlists to your Spotify account.
+- **Responsive Design**: Works on desktop and mobile.
 
 > How It Works
 

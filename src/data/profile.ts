@@ -13,17 +13,19 @@ export const profile = {
 
 export const experience = [
   {
-    company: "Utreee",
-    role: "Full-Stack Software Developer",
+    company: "Utreee IT Advanced Solutions",
+    role: "Software Developer",
     location: "Puerto Rico",
     start: "Jul 2025",
     end: "Present",
     current: true,
     highlights: [
-      "Primary developer on a core banking platform — architecture, security and feature work.",
-      "Built the bank's digital channels and API gateway on top of the core: a customer web banking portal in Laravel, which also serves as the API for a mobile banking app in React Native (Expo).",
-      "Primary developer on a contract and rebate management system for supermarket chains, with a Node.js backend and a React frontend hosted on AWS — calculation logic and reporting.",
-      "Handle deployments for these applications.",
+      "Built the customer web banking portal and the API layer to the Fineract core (Laravel, React).",
+      "Engineered a React Native (Expo) mobile banking app with biometric/PIN MFA and PCI DSS card handling.",
+      "Built the Angular back-office and customized the multi-tenant Fineract core (Java, Spring Boot).",
+      "Developed a payroll platform (Laravel, React) with a companion React Native app.",
+      "Develop and maintain a rebate management system for supermarket chains (React, Node.js, AWS).",
+      "Own deployments for the core and all client apps across environments (Linux, Nginx, PM2, AWS).",
     ],
   },
   {
@@ -44,9 +46,8 @@ export const experience = [
     end: "Apr 2024",
     current: false,
     highlights: [
-      "Redesigned UI/UX for Laravel-based web apps, improving usability and responsiveness.",
-      "Improved performance and accessibility.",
-      "Collaborated with the team using Bitbucket for version control and workflow.",
+      "Redesigned UI/UX for Laravel-based web apps, improving usability, responsiveness, performance and accessibility.",
+      "Collaborated with a team using Bitbucket for version control and workflow management.",
     ],
   },
   {
@@ -93,8 +94,9 @@ export const skills = [
   { category: "Front-end", items: ["React", "Angular", "Astro", "Tailwind"] },
   { category: "Back-end", items: ["Node.js", "Express", "Laravel", "Spring Boot"] },
   { category: "Mobile", items: ["Android SDK", "Jetpack Compose", "React Native"] },
-  { category: "Databases", items: ["PostgreSQL", "SQL Server", "MySQL", "Firebase"] },
-  { category: "Tools", items: ["Git", "GitHub", "GitLab", "Docker", "AWS", "Postman", "Claude Code"] },
+  { category: "Databases", items: ["PostgreSQL", "SQL Server", "MySQL", "Redis", "Firebase"] },
+  { category: "Cloud & DevOps", items: ["AWS", "Docker", "Nginx", "PM2"] },
+  { category: "Tools", items: ["Git", "GitHub", "GitLab", "Postman", "Claude Code"] },
   { category: "Environment", items: ["macOS", "Cursor", "Terminal"] },
 ];
 
