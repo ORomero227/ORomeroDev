@@ -3,6 +3,9 @@ import { profile, skills, education, experience } from "../data/profile";
 
 const [currentRole] = experience.filter((x) => x.current);
 const previous = experience.filter((x) => !x.current);
+// "Freelance" isn't a company, so it reads as "Freelance Software Developer".
+const roleAt = (x: { role: string; company: string }) =>
+  x.company === "Freelance" ? `Freelance ${x.role}` : `${x.role} at ${x.company}`;
 ---
 
 <div class="window pdoc">
@@ -34,7 +37,7 @@ const previous = experience.filter((x) => !x.current);
         The Developer currently serves as <strong>{currentRole.role}</strong> at
         <strong>{currentRole.company}</strong> ({currentRole.start} – {currentRole.end}), working on
         core banking, digital channels, an API gateway and an AWS-hosted rebate system.
-        Previously: {previous.map((x) => `${x.role} at ${x.company}`).join("; ")}.
+        Previously: {previous.map(roleAt).join("; ")}.
       </p>
 
       <h4>3. Stack</h4>
