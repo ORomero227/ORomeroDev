@@ -1,6 +1,5 @@
 ---
 import { profile } from "../data/profile";
-const today = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 ---
 
 <section class="sign container reveal">
@@ -12,7 +11,7 @@ const today = new Date().toLocaleDateString("en-US", { month: "long", day: "nume
       <div class="sig">
         <p class="sig-label">Developer</p>
         <p class="sig-name signed">{profile.shortName}</p>
-        <p class="sig-meta">Signed · {today}</p>
+        <p class="sig-meta">Signed<span data-sign-date></span></p>
       </div>
       <div class="sig">
         <label class="sig-label" for="sig-input">You</label>
@@ -32,6 +31,12 @@ const today = new Date().toLocaleDateString("en-US", { month: "long", day: "nume
 </section>
 
 <script>
+  // Date is filled in on the client so it never freezes at build time.
+  document.querySelectorAll<HTMLElement>("[data-sign-date]").forEach((el) => {
+    const today = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+    el.textContent = ` · ${today}`;
+  });
+
   const form = document.querySelector<HTMLFormElement>("[data-sign]");
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
