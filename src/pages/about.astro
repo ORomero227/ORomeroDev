@@ -60,6 +60,11 @@ import { profile, experience, education, skills } from "../data/profile";
                 <p class="ttitle">{e.title}</p>
                 <p class="tsub">{e.institution}</p>
                 {e.description && <p class="tdesc">{e.description}</p>}
+                {e.credentialUrl && (
+                  <a href={e.credentialUrl} target="_blank" rel="noopener" class="tlink">
+                    Verify on Credly ↗
+                  </a>
+                )}
               </div>
               <div class="tside">
                 <span class="tdate">{e.date}</span>
@@ -150,6 +155,20 @@ import { profile, experience, education, skills } from "../data/profile";
   .tdesc {
     max-width: 60ch;
     margin-top: 6px;
+  }
+
+  .tlink {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .tlink:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .tside {

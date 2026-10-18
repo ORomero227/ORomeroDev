@@ -70,6 +70,7 @@ export const education = [
     institution: "Amazon Web Services",
     date: "Oct 2026",
     status: "Certified",
+    credentialUrl: "https://www.credly.com/badges/a13d8df0-2ce0-43c9-a177-353b27c572b6/public_url",
   },
   {
     kind: "Degree",
@@ -84,6 +85,7 @@ export const education = [
     institution: "Coursera — Google",
     date: "Aug 2024",
     status: "Completed",
+    credentialUrl: "https://www.credly.com/badges/2bb90a6e-e891-4192-b487-f1727e7a723b/public_url",
     description:
       "Linux, SIEM tools and IDS; identifying and mitigating risks, threats and vulnerabilities.",
   },
