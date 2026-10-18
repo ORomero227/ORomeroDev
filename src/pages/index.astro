@@ -2,15 +2,15 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectRow from "../components/ProjectRow.astro";
-import AskDemo from "../components/AskDemo.astro";
-import ProfileDoc from "../components/ProfileDoc.astro";
 import SignCTA from "../components/SignCTA.astro";
 import FeatureCard from "../components/FeatureCard.astro";
-import { profile } from "../data/profile";
+import { profile, experience, skills } from "../data/profile";
 
 const projects = (await getCollection("project", (p) => p.data.featured))
   .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity))
   .slice(0, 3);
+
+const current = experience.find((x) => x.current) ?? experience[0];
 
 /**
  * Monospace fragments drifting in the hero's side gutters.
@@ -48,11 +48,10 @@ const snippets = [
 
       <div class="container hero-inner">
         <h1 id="hero-title" class="headline">
-          <span>I build web apps.</span>
-          <span>Develop mobile apps.</span>
-          <span>Wire up the backends.</span>
-          <span class="bright">You get software that just works.</span>
+          <span>Hi, I'm Oscar.</span>
+          <span class="bright">{profile.role} in {profile.location}.</span>
         </h1>
+        <p class="lead">{profile.summary}</p>
 
         <div class="hero-actions">
           <a href={`mailto:${profile.email}`} class="hbtn hbtn-solid">Contact me</a>
@@ -62,6 +61,7 @@ const snippets = [
             >
             See my work
           </a>
+          <a href={profile.cv} target="_blank" rel="noopener" class="hbtn hbtn-soft">Download CV</a>
         </div>
       </div>
     </section>
@@ -73,41 +73,45 @@ const snippets = [
         title="Selected work"
         description="Web, mobile, desktop and automation projects — each one shipped end to end."
       >
-        <div class="work-split">
-          <div class="pane pane-left">
-            <p class="pane-label">Start with what you need.</p>
-            <p class="pane-title">A problem. A first build.</p>
-            <div class="fake-input">
-              <span>Describe what you need…</span>
-              <kbd>Enter</kbd>
-            </div>
-            <a href="/project/" class="all-link">Browse all projects →</a>
-          </div>
-          <div class="pane pane-right">
-            <div class="pane-bar">
-              <span>Featured projects</span>
-              <span class="faint">{projects.length} shown</span>
-            </div>
-            <ul class="rows">
-              {projects.map((p) => <ProjectRow project={p} />)}
-            </ul>
-          </div>
+        <div class="pane-bar">
+          <span>Featured projects</span>
+          <a href="/project/" class="all-link">Browse all projects →</a>
+        </div>
+        <ul class="rows">
+          {projects.map((p) => <ProjectRow project={p} />)}
+        </ul>
+      </FeatureCard>
+
+      <FeatureCard
+        title="Where I work now"
+        description={`${current.role} at ${current.company} since ${current.start}.`}
+      >
+        <div class="now">
+          <ul class="now-list">
+            {current.highlights.slice(0, 4).map((h) => <li>{h}</li>)}
+          </ul>
+          <a href="/about/" class="all-link">Full experience &amp; education →</a>
         </div>
       </FeatureCard>
 
       <FeatureCard
-        title="Ask about my work"
-        description="Find stacks, details and answers across my projects, with the source at hand."
-        pausable
+        title="Skills"
+        description="The stack I reach for across web, mobile and backend."
       >
-        <AskDemo />
-      </FeatureCard>
-
-      <FeatureCard
-        title="Read the fine print"
-        description="Scope, stack and education — written like a contract, minus the legalese."
-      >
-        <div class="reveal"><ProfileDoc /></div>
+        <div class="skills">
+          {
+            skills.map((s) => (
+              <div class="srow">
+                <p class="scat">{s.category}</p>
+                <div class="sitems">
+                  {s.items.map((i) => (
+                    <span class="tag">{i}</span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
       </FeatureCard>
     </div>
 
@@ -297,60 +301,27 @@ const snippets = [
     max-width: 1000px;
   }
 
-  .work-split {
-    display: grid;
-    grid-template-columns: 1fr;
+  .lead {
+    margin-top: 24px;
+    font-size: 18px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 58ch;
   }
 
-  .pane {
-    min-width: 0;
-  }
-
-  .pane-left {
-    padding: 32px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .pane-label {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  .pane-title {
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    margin-bottom: 18px;
-  }
-
-  .fake-input {
+  .pane-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 46px;
-    padding: 0 8px 0 14px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    font-size: 14px;
-    color: var(--faint);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-  }
-
-  kbd {
-    font-family: var(--font-sans);
-    font-size: 12px;
+    gap: 12px;
+    height: 48px;
+    padding: 0 18px;
+    font-size: 13px;
     color: var(--muted);
-    border: 1px solid var(--line);
-    background: var(--surface);
-    border-radius: 6px;
-    padding: 3px 8px;
+    border-bottom: 1px solid var(--line);
   }
 
   .all-link {
-    margin-top: 18px;
     font-size: 14px;
     color: var(--ink);
     text-decoration: none;
@@ -362,41 +333,64 @@ const snippets = [
     text-underline-offset: 3px;
   }
 
-  .pane-right {
-    background: var(--surface);
-  }
-
-  .pane-bar {
-    display: flex;
-    justify-content: space-between;
-    height: 48px;
-    align-items: center;
-    padding: 0 18px;
-    font-size: 13px;
-    color: var(--muted);
-    border-bottom: 1px solid var(--line);
-    background: #fff;
-  }
-
-  .faint {
-    color: var(--faint);
-  }
-
   .rows {
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #fff;
+  }
+
+  .now {
+    padding: 24px;
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .now-list {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 8px;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .now-list li::marker {
+    color: var(--faint);
+  }
+
+  .srow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+    padding: 16px 24px;
+  }
+
+  .srow + .srow {
+    border-top: 1px solid var(--line);
+  }
+
+  .scat {
+    font-size: 14px;
+    color: var(--muted);
+    width: 120px;
+  }
+
+  .sitems {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
   }
 
   @media (min-width: 860px) {
-    .work-split {
-      grid-template-columns: 0.85fr 1.15fr;
+    .now {
+      padding: 36px 44px 44px;
     }
-    .pane-left {
-      padding: 44px;
-      border-bottom: 0;
-      border-right: 1px solid var(--line);
+    .srow {
+      padding: 18px 44px;
     }
     .hero {
       padding-top: 240px;
