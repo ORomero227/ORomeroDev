@@ -91,10 +91,10 @@ export const education = [
 export const skills = [
   { category: "Languages", items: ["TypeScript", "Java", "PHP", "SQL"] },
   { category: "Front-end", items: ["React", "Angular", "Astro", "Tailwind"] },
-  { category: "Back-end", items: ["Express", "Laravel", "Spring Boot"] },
+  { category: "Back-end", items: ["Node.js", "Express", "Laravel", "Spring Boot"] },
   { category: "Mobile", items: ["Android SDK", "Jetpack Compose", "React Native"] },
   { category: "Databases", items: ["PostgreSQL", "SQL Server", "MySQL", "Firebase"] },
-  { category: "Tools", items: ["Git", "GitHub", "GitLab", "Docker", "Postman", "Claude Code"] },
+  { category: "Tools", items: ["Git", "GitHub", "GitLab", "Docker", "AWS", "Postman", "Claude Code"] },
   { category: "Environment", items: ["macOS", "Cursor", "Terminal"] },
 ];
 
