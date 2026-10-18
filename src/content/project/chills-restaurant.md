@@ -9,7 +9,7 @@ description: |
   A dynamic restaurant website built with .NET and MS SQL Server for a robust backend and efficient data management.
 tags:
   - Backend Developer
-technologies: ["C#", "ASP.NET", "EntityFramework", "SQL Server"]
+technologies: ["C#", "ASP.NET", "EntityFramework", "SQL Server", "Azure"]
 shortDescription: "A collaborative project to create an attractive and dynamic website for a restaurant using cutting-edge technologies."
 ---
 
@@ -23,6 +23,7 @@ This is a collaborative project to create an attractive and dynamic website for 
 - **ASP.NET MVC**
 - **ASP Identity**
 - **Bootstrap**
+- **Microsoft Azure** (test deployment)
 
 > Features
 
@@ -31,3 +32,4 @@ This is a collaborative project to create an attractive and dynamic website for 
 - **Menu Management**: Full CRUD capabilities for effortless menu updates, allowing admins to add, edit, or remove items as needed.
 - **Order Management**: Streamlined order processing with CRUD functionality, enabling efficient tracking from placement to fulfillment.
 - **Account Management**: Users can update personal information and preferences for a personalized experience.
+- **Cloud Deployment**: Deployed to **Microsoft Azure** for testing.
