@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SignCTA from "../components/SignCTA.astro";
 import PageHero from "../components/PageHero.astro";
-import { profile, education, skills } from "../data/profile";
+import { profile, experience, education, skills } from "../data/profile";
 ---
 
 <BaseLayout title="About — Oscar Romero" description="About Oscar Romero, full-stack developer in Puerto Rico." navVariant="dark">
@@ -19,6 +19,39 @@ import { profile, education, skills } from "../data/profile";
         <a href={profile.linkedin} target="_blank" rel="noopener" class="hbtn hbtn-soft">LinkedIn</a>
       </div>
     </PageHero>
+
+    <section class="container block" id="experience">
+      <div class="block-head">
+        <h2>Experience</h2>
+      </div>
+      <ol class="table timeline">
+        {
+          experience.map((x) => (
+            <li class="trow xrow">
+              <span class:list={["dot", x.current && "dot-current"]} aria-hidden="true" />
+              <div class="tmain">
+                <p class="ttitle">{x.role}</p>
+                <p class="tsub">
+                  {x.company}
+                  {x.location && <> · {x.location}</>}
+                </p>
+                <ul class="xlist">
+                  {x.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                </ul>
+              </div>
+              <div class="tside">
+                <span class="tdate">
+                  {x.start} – {x.end}
+                </span>
+                {x.current && <span class="pill pill-green">Current</span>}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
 
     <section class="container block">
       <div class="block-head">
@@ -134,6 +167,67 @@ import { profile, education, skills } from "../data/profile";
 
   .srow {
     align-items: center;
+  }
+
+  /* Experience timeline: a rail with one dot per role */
+  .xrow {
+    position: relative;
+    padding-left: 44px;
+    align-items: flex-start;
+  }
+
+  .xrow::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .xrow:first-child::before {
+    top: 26px;
+  }
+
+  .xrow:last-child::before {
+    bottom: calc(100% - 26px);
+  }
+
+  .dot {
+    position: absolute;
+    left: 20px;
+    top: 22px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--line-strong);
+  }
+
+  .dot-current {
+    background: var(--green);
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px var(--green-bg);
+  }
+
+  .xrow .tmain {
+    flex: 1 1 420px;
+    min-width: 0;
+  }
+
+  .xlist {
+    margin: 10px 0 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 4px;
+    color: var(--ink-2);
+    font-size: 14.5px;
+    max-width: 64ch;
+  }
+
+  .xrow .tside {
+    white-space: nowrap;
   }
 
   .scat {

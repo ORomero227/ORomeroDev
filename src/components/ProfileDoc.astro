@@ -1,5 +1,8 @@
 ---
-import { profile, skills, education } from "../data/profile";
+import { profile, skills, education, experience } from "../data/profile";
+
+const [currentRole] = experience.filter((x) => x.current);
+const previous = experience.filter((x) => !x.current);
 ---
 
 <div class="window pdoc">
@@ -26,7 +29,15 @@ import { profile, skills, education } from "../data/profile";
         code and as many rounds of revisions as it takes.
       </p>
 
-      <h4>2. Stack</h4>
+      <h4>2. Experience</h4>
+      <p>
+        The Developer currently serves as <strong>{currentRole.role}</strong> at
+        <strong>{currentRole.company}</strong> ({currentRole.start} – {currentRole.end}), working on
+        core banking, digital channels, an API gateway and an AWS-hosted rebate system.
+        Previously: {previous.map((x) => `${x.role} at ${x.company}`).join("; ")}.
+      </p>
+
+      <h4>3. Stack</h4>
       <dl class="stack">
         {
           skills.map((s) => (
@@ -38,7 +49,7 @@ import { profile, skills, education } from "../data/profile";
         }
       </dl>
 
-      <h4>3. Education</h4>
+      <h4>4. Education</h4>
       <ul class="edu">
         {
           education.map((e) => (
@@ -49,7 +60,7 @@ import { profile, skills, education } from "../data/profile";
         }
       </ul>
 
-      <h4>4. Availability</h4>
+      <h4>5. Availability</h4>
       <p>
         <span class="clause" data-clause
           >The Developer is <s class="old">not currently looking</s>
@@ -66,7 +77,7 @@ import { profile, skills, education } from "../data/profile";
       </div>
 
       <div class="c-card c1">
-        <p class="c-ref">Selected section · 4. Availability</p>
+        <p class="c-ref">Selected section · 5. Availability</p>
         <p class="c-author"><strong>Recruiter</strong> <span>Just now</span></p>
         <p>Are you open to new projects? We have something full-stack.</p>
       </div>
