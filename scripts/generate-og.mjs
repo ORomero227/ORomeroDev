@@ -11,9 +11,9 @@ const svg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2b0607"/>
-      <stop offset="0.55" stop-color="#8a1d0c"/>
-      <stop offset="1" stop-color="#ec5a2a"/>
+      <stop offset="0" stop-color="#050b2b"/>
+      <stop offset="0.55" stop-color="#12358a"/>
+      <stop offset="1" stop-color="#3b7bec"/>
     </linearGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
