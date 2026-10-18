@@ -1,6 +1,8 @@
 ---
 title: Borinquen Picks
 publishDate: 2025-02-16 00:00:00
+featured: true
+order: 3
 projectType: Mobile App
 img: /assets/BorinquenPicksLogo.webp
 img_alt: Borinquen Picks Project Logo

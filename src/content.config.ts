@@ -25,6 +25,8 @@ export const collections = {
       githubCode: z.string().optional(),
       liveUrl: z.string().optional(),
       technologies: z.array(z.string()).optional(),
+      featured: z.boolean().optional(),
+      order: z.number().optional(),
     }),
   }),
 };

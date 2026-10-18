@@ -8,9 +8,9 @@ import SignCTA from "../components/SignCTA.astro";
 import FeatureCard from "../components/FeatureCard.astro";
 import { profile } from "../data/profile";
 
-const projects = (await getCollection("project"))
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 5);
+const projects = (await getCollection("project", (p) => p.data.featured))
+  .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity))
+  .slice(0, 3);
 
 /**
  * Monospace fragments drifting in the hero's side gutters.
@@ -85,7 +85,7 @@ const snippets = [
           </div>
           <div class="pane pane-right">
             <div class="pane-bar">
-              <span>Recent projects</span>
+              <span>Featured projects</span>
               <span class="faint">{projects.length} shown</span>
             </div>
             <ul class="rows">
